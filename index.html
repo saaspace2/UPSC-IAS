@@ -111,8 +111,8 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
 .ans-chip{padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;font-family:'DM Mono',monospace}
 .ac-bad{background:var(--red-light);color:var(--red)}
 .ac-ok{background:var(--green-light);color:var(--green)}
-.ac-skip{background:var(--surface2);color:var(--text2);border: 1px solid var(--border)}
-.ac-guess{background:var(--amber-light);color:var(--amber);border: 1px solid #f0c566;}
+.ac-skip{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+.ac-guess{background:var(--amber-light);color:var(--amber);border:1px solid #f0c566;}
 .ai-box{display:none;margin:0 8px 6px;background:var(--teal-light);border:1px solid #a3ddd5;border-radius:var(--r);padding:12px 14px;font-size:13px;color:var(--text);line-height:1.75;white-space:pre-wrap}
 .ai-box.show{display:block}
 .ai-loading{color:var(--teal);font-style:italic}
@@ -139,8 +139,6 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
 .auth-card{max-width:400px;margin:20px auto;background:var(--surface);padding:30px;border-radius:var(--rl);border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,0.05);text-align:center;}
 .auth-title{font-size:18px;font-weight:600;margin-bottom:6px;font-family:'DM Serif Display',serif;}
 .auth-sub{font-size:13px;color:var(--text2);margin-bottom:20px;}
-
-/* UPSC OMR */
 :root{--omr-pink:#e0127a;--omr-pink-light:#fce8f3;--omr-pink-mid:#f8d0e8;--omr-pink-border:#f0a8d0;--omr-pink-dark:#a8005a;}
 .upsc-omr-wrapper{background:#fff;border:2px solid var(--omr-pink);border-radius:8px;overflow:hidden;margin-bottom:4px;box-shadow:0 2px 16px rgba(224,18,122,.12);}
 .upsc-omr-titlebar{background:linear-gradient(90deg,var(--omr-pink) 0%,#c00065 100%);color:#fff;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
@@ -176,13 +174,10 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
 .ak-preview-ans{background:var(--green);color:#fff;padding:1px 7px;border-radius:10px;font-weight:700;font-size:11px;}
 .ak-preview-empty{background:var(--surface2);color:var(--text3);padding:1px 7px;border-radius:10px;font-size:11px;}
 .correct-ans-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;font-family:'DM Mono',monospace;background:var(--green-light);color:var(--green);border:1px solid #a3d9b8;}
-
-/* Cloud status indicator */
 .cloud-status{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500;display:inline-flex;align-items:center;gap:5px;}
 .cloud-status.ok{background:var(--green-light);color:var(--green);}
 .cloud-status.err{background:var(--red-light);color:var(--red);}
 .cloud-status.busy{background:var(--amber-light);color:var(--amber);}
-
 @media(max-width:640px){.main{padding:14px}.header{padding:0 14px}.upsc-omr-grid{grid-template-columns:repeat(2,1fr)}.score-breakdown{grid-template-columns:1fr 1fr}.nav-tab .ntxt{display:none}}
 </style>
 </head>
@@ -211,67 +206,42 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
   </div>
 </header>
 <main class="main">
-
 <div id="page-teacher" class="page active">
   <div id="teacher-login-sec" class="auth-card">
     <div class="auth-title">Teacher Portal Login</div>
     <div class="auth-sub">Enter credentials to configure tests</div>
-    <input type="text" id="teacher-login-name" placeholder="Username (e.g., admin)" style="width: 100%; margin-bottom: 10px;">
-    <input type="password" id="teacher-login-pass" placeholder="Password" style="width: 100%; margin-bottom: 16px;">
-    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="doTeacherLogin()">Login to Dashboard</button>
+    <input type="text" id="teacher-login-name" placeholder="Username (e.g., admin)" style="width:100%;margin-bottom:10px;">
+    <input type="password" id="teacher-login-pass" placeholder="Password" style="width:100%;margin-bottom:16px;">
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="doTeacherLogin()">Login to Dashboard</button>
   </div>
-
   <div id="teacher-content-sec" class="gone">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px;">
-      <div style="font-size: 16px; font-weight: 600;">Welcome, <span style="color: var(--purple);">Teacher</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <div style="font-size:16px;font-weight:600;">Welcome, <span style="color:var(--purple);">Teacher</span></div>
       <button class="btn btn-sm" onclick="teacherLogout()">Log Out</button>
     </div>
-
     <div class="card">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        Paper Configuration
-      </div>
+      <div class="card-title"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>Paper Configuration</div>
       <div style="font-size:13px;color:var(--text2);margin-bottom:12px">Enable papers and set the number of questions.</div>
       <div id="paper-configs"></div>
       <div class="action-row" style="margin-top:10px">
-        <button class="btn btn-sm" onclick="addPaper()">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Paper
-        </button>
+        <button class="btn btn-sm" onclick="addPaper()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Paper</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        Question Paper PDFs <span style="font-weight:400;color:var(--text3);font-size:11px;text-transform:none;letter-spacing:0;margin-left:4px;">— used for AI explanations</span>
-      </div>
+      <div class="card-title"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Question Paper PDFs <span style="font-weight:400;color:var(--text3);font-size:11px;text-transform:none;letter-spacing:0;margin-left:4px;">— used for AI explanations</span></div>
       <div id="qp-tabs" class="ptabs"></div>
       <div id="qp-panels"></div>
     </div>
-
     <div class="card">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        Answer Key PDFs
-        <span style="font-weight:400;color:var(--text3);font-size:11px;text-transform:none;letter-spacing:0;margin-left:4px;">— RAG-powered explanations of wrong answers</span>
-      </div>
+      <div class="card-title"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Answer Key PDFs <span style="font-weight:400;color:var(--text3);font-size:11px;text-transform:none;letter-spacing:0;margin-left:4px;">— RAG-powered explanations</span></div>
       <div id="akpdf-tabs" class="ptabs"></div>
       <div id="akpdf-panels"></div>
     </div>
-
     <div class="card">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        Answer Key
-      </div>
+      <div class="card-title"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Answer Key</div>
       <div id="ak-locked-banner" class="ak-locked gone">
         <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        <div style="flex:1">
-          <div class="ak-locked-title">Answer key saved &amp; hidden from students</div>
-          <div class="ak-locked-sub" id="ak-locked-sub"></div>
-        </div>
+        <div style="flex:1"><div class="ak-locked-title">Answer key saved &amp; hidden from students</div><div class="ak-locked-sub" id="ak-locked-sub"></div></div>
         <button class="btn btn-sm" onclick="unlockKey()">Edit Key</button>
       </div>
       <div id="ak-editor">
@@ -283,323 +253,110 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
         </div>
         <div id="ak-grids"></div>
         <div class="action-row">
-          <button class="btn btn-primary" onclick="saveKey()">
-            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            Save &amp; Lock Answer Key
-          </button>
-          <button class="btn" id="cloud-save-btn" onclick="saveToCloud()" style="background:var(--teal-light);border-color:var(--teal);color:var(--teal)">
-            <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-            ☁ Save to Cloud
-          </button>
-          <button class="btn btn-sm" id="cloud-load-btn" onclick="loadFromCloud()" style="margin-left:auto">
-            <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
-            ↓ Load from Cloud
-          </button>
+          <button class="btn btn-primary" onclick="saveKey()"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Save &amp; Lock Answer Key</button>
+          <button class="btn" id="cloud-save-btn" onclick="saveToCloud()" style="background:var(--teal-light);border-color:var(--teal);color:var(--teal)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>&#9749; Save to Cloud</button>
+          <button class="btn btn-sm" id="cloud-load-btn" onclick="loadFromCloud()" style="margin-left:auto"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>&#8595; Load from Cloud</button>
           <span id="cloud-status-badge"></span>
         </div>
       </div>
     </div>
-
     <div class="card" id="ak-preview-card">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        Answer Key Preview
-      </div>
+      <div class="card-title"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Answer Key Preview</div>
       <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Quick view of all saved answers across papers.</div>
       <div id="ak-preview-tabs" class="ptabs"></div>
       <div id="ak-preview-panels"></div>
     </div>
-
   </div>
 </div>
-
 <div id="page-student" class="page">
   <div id="stu-login-sec" class="auth-card">
     <div class="auth-title">Student Portal Login</div>
     <div class="auth-sub">Enter your details to take or resume your test</div>
-    <input type="text" id="stu-login-name" placeholder="Full Name" style="width: 100%; margin-bottom: 10px;">
-    <input type="password" id="stu-login-pass" placeholder="Password" style="width: 100%; margin-bottom: 16px;">
-    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="doStudentLogin()">Login &amp; Start Test</button>
+    <input type="text" id="stu-login-name" placeholder="Full Name" style="width:100%;margin-bottom:10px;">
+    <input type="password" id="stu-login-pass" placeholder="Password" style="width:100%;margin-bottom:16px;">
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="doStudentLogin()">Login &amp; Start Test</button>
   </div>
-
   <div id="stu-test-sec" class="gone">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px;">
-      <div style="font-size: 16px; font-weight: 600;">Welcome, <span id="stu-welcome-name" style="color: var(--purple);"></span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <div style="font-size:16px;font-weight:600;">Welcome, <span id="stu-welcome-name" style="color:var(--purple);"></span></div>
       <button class="btn btn-sm" onclick="stuLogout()">Log Out</button>
     </div>
-
     <div id="no-key-warn" class="no-key-warn gone">
       <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       The teacher hasn't saved an answer key yet.
-      <button class="btn btn-sm" style="margin-left:auto;flex-shrink:0" onclick="loadFromCloud()">↓ Load Key from Cloud</button>
+      <button class="btn btn-sm" style="margin-left:auto;flex-shrink:0" onclick="loadFromCloud()">&#8595; Load Key from Cloud</button>
     </div>
-
     <div class="paper-sel-box">
-      <div class="paper-sel-title" style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="paper-sel-title" style="display:flex;justify-content:space-between;align-items:center;">
         <span>Select Paper to Answer</span>
         <div id="stu-pdf-btn-container"></div>
       </div>
       <div id="paper-chips" class="paper-chips"></div>
     </div>
-    
     <div id="stu-stats"></div>
     <div id="stu-omr"></div>
     <div id="stu-key-status" style="margin-top:12px;padding:10px 14px;border-radius:10px;font-size:13px;"></div>
-    
     <div class="action-row">
-      <button class="btn btn-primary" onclick="evaluatePaperAndSave()">
-        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        Submit &amp; View Results
-      </button>
+      <button class="btn btn-primary" onclick="evaluatePaperAndSave()"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Submit &amp; View Results</button>
       <button id="btn-retake" class="btn btn-danger gone" onclick="retakeCurrentPaper()">Retake This Paper</button>
     </div>
     <div id="eval-warn" class="warn"></div>
   </div>
 </div>
-
 <div id="page-result" class="page">
   <div id="result-placeholder" class="placeholder">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
     <div class="placeholder-title">No results currently loaded</div>
-    <div style="font-size:13px; margin-bottom: 24px;">Take the test in the Student tab, or retrieve a past result below.</div>
-    <div style="max-width: 320px; margin: 0 auto; background: var(--surface); padding: 20px; border-radius: var(--rl); border: 1px solid var(--border); text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-      <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--text2);">Retrieve Past Result</div>
-      <input type="text" id="res-login-name" placeholder="Student Name" style="width: 100%; margin-bottom: 10px;">
-      <input type="password" id="res-login-pass" placeholder="Password" style="width: 100%; margin-bottom: 16px;">
-      <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="loadStudentResult(this)">
-        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-        Load My Result
-      </button>
+    <div style="font-size:13px;margin-bottom:24px;">Take the test in the Student tab, or retrieve a past result below.</div>
+    <div style="max-width:320px;margin:0 auto;background:var(--surface);padding:20px;border-radius:var(--rl);border:1px solid var(--border);text-align:left;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text2);">Retrieve Past Result</div>
+      <input type="text" id="res-login-name" placeholder="Student Name" style="width:100%;margin-bottom:10px;">
+      <input type="password" id="res-login-pass" placeholder="Password" style="width:100%;margin-bottom:16px;">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="loadStudentResult(this)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Load My Result</button>
     </div>
   </div>
   <div id="result-content" class="gone">
     <div id="res-student-banner"></div>
-    <div class="card" style="padding:0; overflow:hidden;">
-       <div style="padding:14px 20px; border-bottom:1px solid var(--border); background:var(--surface2);">
-         <div id="res-tabs" class="ptabs" style="margin-bottom:0;"></div>
-       </div>
-       <div id="res-panels" style="padding:20px;"></div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);background:var(--surface2);">
+        <div id="res-tabs" class="ptabs" style="margin-bottom:0;"></div>
+      </div>
+      <div id="res-panels" style="padding:20px;"></div>
     </div>
   </div>
 </div>
 </main>
-
-<div class="toast" id="toast">
-  <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-  <span id="toast-msg"></span>
-</div>
-
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span id="toast-msg"></span></div>
 <script>
-/* ═══════════════════════════════════════════════
-   SUPABASE SETUP
-   ═══════════════════════════════════════════════ */
-const SUPA_URL = 'https://fffwnbcbufchinhzofhn.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmZnduYmNidWZjaGluaHpvZmhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNjI5MDQsImV4cCI6MjA5NDgzODkwNH0.9HM8u_c7mkK3gjDKSwZPr4ClODbwYPxa5A6JHg2WcHM';
-const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
-const PDF_BUCKET = 'omr-pdfs'; // Supabase Storage bucket name
+const SUPA_URL='https://fffwnbcbufchinhzofhn.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmZnduYmNidWZjaGluaHpvZmhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNjI5MDQsImV4cCI6MjA5NDgzODkwNH0.9HM8u_c7mkK3gjDKSwZPr4ClODbwYPxa5A6JHg2WcHM';
+const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+const PDF_BUCKET='omr-pdfs';
 
-/* ═══════════════════════════════════════════════
-   PDF STORAGE HELPERS
-   PDFs are stored in Supabase Storage (not in the DB row),
-   so the omr_state table only holds lightweight JSON.
-   ═══════════════════════════════════════════════ */
-
-/** Upload a single PDF base64 blob to Storage. Returns true on success. */
-async function uploadPDFToStorage(key, base64, fileName) {
-  try {
-    const byteChars = atob(base64);
-    const bytes = new Uint8Array(byteChars.length);
-    for (let i = 0; i < byteChars.length; i++) bytes[i] = byteChars.charCodeAt(i);
-    const blob = new Blob([bytes], { type: 'application/pdf' });
-    // upsert so re-uploads overwrite
-    const { error } = await sb.storage.from(PDF_BUCKET).upload(key, blob, {
-      contentType: 'application/pdf',
-      upsert: true
-    });
-    if (error) { console.error('Storage upload error:', error); return false; }
-    return true;
-  } catch (e) { console.error('uploadPDFToStorage failed:', e); return false; }
+// ── PDF STORAGE (URL-based, persists cross-device) ──────────────────────────
+function getPublicURL(key){
+  const{data}=sb.storage.from(PDF_BUCKET).getPublicUrl(key);
+  return data?.publicUrl||null;
+}
+async function uploadPDFToStorage(pid,file,prefix){
+  try{
+    const safeName=file.name.replace(/[^a-z0-9._-]/gi,'_');
+    const key=`${prefix}_${pid}_${safeName}`;
+    const{error}=await sb.storage.from(PDF_BUCKET).upload(key,file,{contentType:'application/pdf',upsert:true});
+    if(error)throw error;
+    const url=getPublicURL(key);
+    return{key,url,name:file.name};
+  }catch(e){console.error('uploadPDFToStorage:',e);return null;}
 }
 
-/** Download a PDF from Storage and return base64 string (or null). */
-async function downloadPDFFromStorage(key) {
-  try {
-    const { data, error } = await sb.storage.from(PDF_BUCKET).download(key);
-    if (error || !data) return null;
-    return new Promise((res) => {
-      const reader = new FileReader();
-      reader.onload = () => res(reader.result.split(',')[1]);
-      reader.readAsDataURL(data);
-    });
-  } catch (e) { console.error('downloadPDFFromStorage failed:', e); return null; }
-}
-
-/** Upload all QP and AK PDFs currently in memory to Storage.
-    Returns a metadata object { qp: {pid: fileName}, ak: {pid: fileName} }
-    that gets stored in the DB row so we know which storage paths to fetch. */
-async function uploadAllPDFsToStorage() {
-  const meta = { qp: {}, ak: {} };
-  for (const pid of paperOrder) {
-    if (pdfData[pid]?.base64) {
-      const key = `qp_${pid}_${pdfData[pid].name.replace(/[^a-z0-9.]/gi,'_')}`;
-      const ok = await uploadPDFToStorage(key, pdfData[pid].base64, pdfData[pid].name);
-      if (ok) meta.qp[pid] = { key, name: pdfData[pid].name };
-    }
-    if (akPdfData[pid]?.base64) {
-      const key = `ak_${pid}_${akPdfData[pid].name.replace(/[^a-z0-9.]/gi,'_')}`;
-      const ok = await uploadPDFToStorage(key, akPdfData[pid].base64, akPdfData[pid].name);
-      if (ok) meta.ak[pid] = { key, name: akPdfData[pid].name };
-    }
-  }
-  return meta;
-}
-
-/** Download all PDFs listed in metadata from Storage into pdfData / akPdfData. */
-async function downloadAllPDFsFromStorage(meta) {
-  if (!meta) return;
-  for (const pid of Object.keys(meta.qp || {})) {
-    const { key, name } = meta.qp[pid];
-    const b64 = await downloadPDFFromStorage(key);
-    if (b64) pdfData[pid] = { base64: b64, name };
-  }
-  for (const pid of Object.keys(meta.ak || {})) {
-    const { key, name } = meta.ak[pid];
-    const b64 = await downloadPDFFromStorage(key);
-    if (b64) akPdfData[pid] = { base64: b64, name };
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   CLOUD SYNC  (config only — PDFs go to Storage)
-   ═══════════════════════════════════════════════ */
-function setCloudStatus(msg, type) {
-  const el = document.getElementById('cloud-status-badge');
-  if (!el) return;
-  el.className = 'cloud-status ' + type;
-  el.textContent = msg;
-}
-
-async function saveToCloud() {
-  const btn = document.getElementById('cloud-save-btn');
-  btn.disabled = true; btn.textContent = 'Saving…';
-  setCloudStatus('Uploading PDFs…', 'busy');
-
-  try {
-    // 1. Upload PDFs to Storage (separate from DB row)
-    const pdfMeta = await uploadAllPDFsToStorage();
-
-    // 2. Save lightweight config to DB (NO base64 blobs here)
-    const state = {
-      papers, paperOrder, nextIdx, answerKey, keyLocked,
-      pdfMeta  // only metadata (keys + names), not the raw base64
-    };
-
-    const { error } = await sb.from('omr_state').upsert({
-      id: 'main',
-      data: state,
-      updated_at: new Date().toISOString()
-    });
-
-    if (error) throw error;
-    setCloudStatus('✓ Saved', 'ok');
-    showToast('✓ Config & PDFs saved to cloud successfully!');
-  } catch (e) {
-    setCloudStatus('✗ Save failed', 'err');
-    alert('Save failed: ' + e.message + '\n\nIf the PDF is very large, try compressing it before uploading.');
-  }
-
-  btn.disabled = false; btn.textContent = '☁ Save to Cloud';
-}
-
-async function loadFromCloud() {
-  const btn = document.getElementById('cloud-load-btn');
-  if (btn) { btn.disabled = true; btn.textContent = 'Loading…'; }
-  setCloudStatus('Loading…', 'busy');
-
-  try {
-    // 1. Fetch lightweight config from DB
-    const { data, error } = await sb.from('omr_state').select('data').eq('id', 'main').single();
-    if (error) throw error;
-    if (!data?.data) throw new Error('No cloud data found.');
-
-    const s = data.data;
-    if (!s.papers) throw new Error('Cloud data missing paper definitions.');
-
-    const incomingOrder = Array.isArray(s.paperOrder) ? s.paperOrder : Object.keys(s.papers);
-
-    Object.keys(papers).forEach(k => delete papers[k]);
-    Object.assign(papers, s.papers);
-    paperOrder.splice(0, paperOrder.length, ...incomingOrder);
-    nextIdx = (typeof s.nextIdx === 'number' && s.nextIdx > 0) ? s.nextIdx : incomingOrder.length + 1;
-
-    Object.keys(answerKey).forEach(k => delete answerKey[k]);
-    if (s.answerKey) Object.assign(answerKey, s.answerKey);
-
-    // Clear local PDF memory before re-loading
-    Object.keys(pdfData).forEach(k => delete pdfData[k]);
-    Object.keys(akPdfData).forEach(k => delete akPdfData[k]);
-
-    keyLocked = !!s.keyLocked;
-    paperOrder.forEach(id => {
-      if (!answerKey[id]) answerKey[id] = {};
-      if (!studentAns[id]) studentAns[id] = {};
-      if (!guessedAns[id]) guessedAns[id] = {};
-      if (!pdfData[id]) pdfData[id] = null;
-      if (!akPdfData[id]) akPdfData[id] = null;
-    });
-
-    const en = paperOrder.filter(id => papers[id].enabled);
-    curAK = en[0] || paperOrder[0];
-    curStu = en[0] || paperOrder[0];
-    curQP = en[0] || paperOrder[0];
-
-    // Render UI immediately with config (PDFs load in background)
-    renderCfg(); renderQPTabs(); renderAKTabs(); renderAKPdfTabs(); renderAKPreview();
-
-    if (keyLocked) {
-      document.getElementById('ak-editor').classList.add('gone');
-      document.getElementById('ak-locked-banner').classList.remove('gone');
-      document.getElementById('ak-locked-sub').textContent = en.map(id =>
-        `${papers[id].label}: ${Object.keys(answerKey[id]||{}).length}/${papers[id].total} set`
-      ).join(' · ');
-    } else {
-      document.getElementById('ak-editor').classList.remove('gone');
-      document.getElementById('ak-locked-banner').classList.add('gone');
-    }
-
-    setCloudStatus('✓ Config loaded', 'ok');
-    showToast('✓ Config loaded. Fetching PDFs in background…');
-
-    // 2. Download PDFs from Storage in the background
-    if (s.pdfMeta) {
-      downloadAllPDFsFromStorage(s.pdfMeta).then(() => {
-        renderQPTabs(); renderAKPdfTabs();
-        showToast('✓ PDFs loaded from cloud!');
-        setCloudStatus('✓ Fully loaded', 'ok');
-      }).catch(e => {
-        console.error('PDF download error:', e);
-        setCloudStatus('PDFs failed', 'err');
-      });
-    }
-
-  } catch (e) {
-    console.error('Cloud load error:', e);
-    setCloudStatus('✗ Load failed', 'err');
-  }
-
-  if (btn) { btn.disabled = false; btn.textContent = '↓ Load from Cloud'; }
-}
-
-/* ═══════════════════════════════════════════════
-   STATE
-   ═══════════════════════════════════════════════ */
-let papers = { p1:{label:'Paper 1 — GS',total:100,enabled:true}, p2:{label:'Paper 2 — CSAT',total:80,enabled:true} };
-let paperOrder = ['p1','p2'];
-let nextIdx = 3;
-const answerKey={p1:{},p2:{}}, studentAns={p1:{},p2:{}}, guessedAns={p1:{},p2:{}};
-const pdfData={p1:null,p2:null}, akPdfData={p1:null,p2:null};
-let evaluated=false, keyLocked=false, curAK='p1', curStu='p1', curQP='p1';
-let activeStudent = null;
+// ── STATE ───────────────────────────────────────────────────────────────────
+let papers={p1:{label:'Paper 1 — GS',total:100,enabled:true},p2:{label:'Paper 2 — CSAT',total:80,enabled:true}};
+let paperOrder=['p1','p2'];
+let nextIdx=3;
+const answerKey={p1:{},p2:{}},studentAns={p1:{},p2:{}},guessedAns={p1:{},p2:{}};
+const pdfData={p1:null,p2:null},akPdfData={p1:null,p2:null};
+let evaluated=false,keyLocked=false,curAK='p1',curStu='p1',curQP='p1';
+let activeStudent=null;
 
 function initPaper(id){
   if(!answerKey[id])answerKey[id]={};
@@ -609,524 +366,600 @@ function initPaper(id){
   if(!akPdfData[id])akPdfData[id]=null;
 }
 
-/* ═══════════════════════════════════════════════
-   NAV & AUTH
-   ═══════════════════════════════════════════════ */
-let teacherUnlocked = false;
+// ── CLOUD SYNC ───────────────────────────────────────────────────────────────
+function setCloudStatus(msg,type){
+  const el=document.getElementById('cloud-status-badge');
+  if(!el)return;
+  el.className='cloud-status '+type;
+  el.textContent=msg;
+}
 
-function checkTeacherAuth(btn) { goPage('teacher', btn); }
+async function saveToCloud(){
+  const btn=document.getElementById('cloud-save-btn');
+  btn.disabled=true;btn.textContent='Saving…';
+  setCloudStatus('Saving…','busy');
+  try{
+    // pdfData/akPdfData contain {url,name} — lightweight, no base64
+    const state={papers,paperOrder,nextIdx,answerKey,keyLocked,pdfData,akPdfData};
+    const{error}=await sb.from('omr_state').upsert({id:'main',data:state,updated_at:new Date().toISOString()});
+    if(error)throw error;
+    setCloudStatus('✓ Saved','ok');
+    showToast('✓ Config & PDFs saved to cloud!');
+  }catch(e){
+    setCloudStatus('✗ Save failed','err');
+    alert('Save failed: '+e.message);
+  }
+  btn.disabled=false;btn.textContent='☁ Save to Cloud';
+}
 
-function doTeacherLogin() {
-  const u = document.getElementById('teacher-login-name').value.trim();
-  const p = document.getElementById('teacher-login-pass').value.trim();
-  if (u === 'admin' && p === 'admin@123') {
-    teacherUnlocked = true;
+async function loadFromCloud(){
+  const btn=document.getElementById('cloud-load-btn');
+  if(btn){btn.disabled=true;btn.textContent='Loading…';}
+  setCloudStatus('Loading…','busy');
+  try{
+    const{data,error}=await sb.from('omr_state').select('data').eq('id','main').single();
+    if(error)throw error;
+    if(!data?.data)throw new Error('No cloud data found.');
+    const s=data.data;
+    if(!s.papers)throw new Error('Cloud data missing paper definitions.');
+    const incomingOrder=Array.isArray(s.paperOrder)?s.paperOrder:Object.keys(s.papers);
+    Object.keys(papers).forEach(k=>delete papers[k]);
+    Object.assign(papers,s.papers);
+    paperOrder.splice(0,paperOrder.length,...incomingOrder);
+    nextIdx=(typeof s.nextIdx==='number'&&s.nextIdx>0)?s.nextIdx:incomingOrder.length+1;
+    Object.keys(answerKey).forEach(k=>delete answerKey[k]);
+    if(s.answerKey)Object.assign(answerKey,s.answerKey);
+    // Restore PDF URL records — works on any device without re-downloading!
+    Object.keys(pdfData).forEach(k=>delete pdfData[k]);
+    Object.keys(akPdfData).forEach(k=>delete akPdfData[k]);
+    paperOrder.forEach(id=>{
+      answerKey[id]=answerKey[id]||{};
+      studentAns[id]=studentAns[id]||{};
+      guessedAns[id]=guessedAns[id]||{};
+      pdfData[id]=(s.pdfData&&s.pdfData[id])||null;
+      akPdfData[id]=(s.akPdfData&&s.akPdfData[id])||null;
+    });
+    keyLocked=!!s.keyLocked;
+    const en=paperOrder.filter(id=>papers[id].enabled);
+    curAK=en[0]||paperOrder[0];curStu=en[0]||paperOrder[0];curQP=en[0]||paperOrder[0];
+    renderCfg();renderQPTabs();renderAKTabs();renderAKPdfTabs();renderAKPreview();
+    if(keyLocked){
+      document.getElementById('ak-editor').classList.add('gone');
+      document.getElementById('ak-locked-banner').classList.remove('gone');
+      document.getElementById('ak-locked-sub').textContent=en.map(id=>`${papers[id].label}: ${Object.keys(answerKey[id]||{}).length}/${papers[id].total} set`).join(' · ');
+    }else{
+      document.getElementById('ak-editor').classList.remove('gone');
+      document.getElementById('ak-locked-banner').classList.add('gone');
+    }
+    setCloudStatus('✓ Loaded','ok');
+    showToast('✓ Config and PDFs loaded from cloud!');
+  }catch(e){
+    console.error('Cloud load error:',e);
+    setCloudStatus('✗ Load failed','err');
+  }
+  if(btn){btn.disabled=false;btn.textContent='↓ Load from Cloud';}
+}
+
+// ── NAV & AUTH ────────────────────────────────────────────────────────────────
+let teacherUnlocked=false;
+function checkTeacherAuth(btn){goPage('teacher',btn);}
+function doTeacherLogin(){
+  const u=document.getElementById('teacher-login-name').value.trim();
+  const p=document.getElementById('teacher-login-pass').value.trim();
+  if(u==='admin'&&p==='admin@123'){
+    teacherUnlocked=true;
     document.getElementById('teacher-login-sec').classList.add('gone');
     document.getElementById('teacher-content-sec').classList.remove('gone');
     showToast('Logged into Teacher Dashboard.');
-  } else {
-    alert('Invalid credentials. (Hint: admin / admin@123)');
-  }
+  }else{alert('Invalid credentials. (Hint: admin / admin@123)');}
 }
-
-function teacherLogout() {
-  teacherUnlocked = false;
-  document.getElementById('teacher-login-name').value = '';
-  document.getElementById('teacher-login-pass').value = '';
+function teacherLogout(){
+  teacherUnlocked=false;
+  document.getElementById('teacher-login-name').value='';
+  document.getElementById('teacher-login-pass').value='';
   document.getElementById('teacher-login-sec').classList.remove('gone');
   document.getElementById('teacher-content-sec').classList.add('gone');
 }
-
-function goPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+function goPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
   btn.classList.add('active');
-  if (id === 'student') refreshStudent();
+  if(id==='student')refreshStudent();
 }
 
-/* ═══════════════════════════════════════════════
-   PAPER CONFIG
-   ═══════════════════════════════════════════════ */
-let _labelTimer = {};
-function renderCfg() {
-  const w = document.getElementById('paper-configs'); w.innerHTML = '';
-  paperOrder.forEach(id => {
-    const p = papers[id];
-    const row = document.createElement('div'); row.className = 'paper-cfg-row';
-    const tog = document.createElement('label'); tog.className = 'tog';
-    const chk = document.createElement('input'); chk.type = 'checkbox'; chk.checked = p.enabled;
-    chk.onchange = () => toggleP(id, chk.checked);
-    const sl = document.createElement('span'); sl.className = 'tog-sl';
-    tog.appendChild(chk); tog.appendChild(sl); row.appendChild(tog);
-    const nameInp = document.createElement('input'); nameInp.type = 'text'; nameInp.value = p.label;
-    nameInp.placeholder = 'Paper name'; nameInp.style.cssText = 'flex:1;min-width:140px;padding:6px 10px';
-    nameInp.oninput = () => {
-      papers[id].label = nameInp.value || id;
+// ── PAPER CONFIG ─────────────────────────────────────────────────────────────
+let _labelTimer={};
+function renderCfg(){
+  const w=document.getElementById('paper-configs');w.innerHTML='';
+  paperOrder.forEach(id=>{
+    const p=papers[id];
+    const row=document.createElement('div');row.className='paper-cfg-row';
+    const tog=document.createElement('label');tog.className='tog';
+    const chk=document.createElement('input');chk.type='checkbox';chk.checked=p.enabled;
+    chk.onchange=()=>toggleP(id,chk.checked);
+    const sl=document.createElement('span');sl.className='tog-sl';
+    tog.appendChild(chk);tog.appendChild(sl);row.appendChild(tog);
+    const nameInp=document.createElement('input');nameInp.type='text';nameInp.value=p.label;
+    nameInp.placeholder='Paper name';nameInp.style.cssText='flex:1;min-width:140px;padding:6px 10px';
+    nameInp.oninput=()=>{
+      papers[id].label=nameInp.value||id;
       clearTimeout(_labelTimer[id]);
-      _labelTimer[id] = setTimeout(() => syncTabs(), 700);
+      _labelTimer[id]=setTimeout(()=>syncTabs(),700);
     };
-    nameInp.onblur = () => { clearTimeout(_labelTimer[id]); syncTabs(); };
+    nameInp.onblur=()=>{clearTimeout(_labelTimer[id]);syncTabs();};
     row.appendChild(nameInp);
-    const lbl = document.createElement('label'); lbl.textContent = 'Questions:'; lbl.style.cssText = 'font-size:12px;color:var(--text3)';
+    const lbl=document.createElement('label');lbl.textContent='Questions:';lbl.style.cssText='font-size:12px;color:var(--text3)';
     row.appendChild(lbl);
-    const numInp = document.createElement('input'); numInp.type = 'number'; numInp.value = p.total; numInp.min = 1; numInp.max = 500;
-    numInp.style.cssText = 'width:80px;padding:6px 10px';
-    numInp.oninput = () => setTotal(id, numInp.value);
+    const numInp=document.createElement('input');numInp.type='number';numInp.value=p.total;numInp.min=1;numInp.max=500;
+    numInp.style.cssText='width:80px;padding:6px 10px';
+    numInp.oninput=()=>setTotal(id,numInp.value);
     row.appendChild(numInp);
-    if (paperOrder.length > 1) {
-      const rmBtn = document.createElement('button'); rmBtn.className = 'btn btn-sm btn-danger';
-      rmBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg> Remove';
-      rmBtn.onclick = () => removePaperById(id);
+    if(paperOrder.length>1){
+      const rmBtn=document.createElement('button');rmBtn.className='btn btn-sm btn-danger';
+      rmBtn.innerHTML='<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg> Remove';
+      rmBtn.onclick=()=>removePaperById(id);
       row.appendChild(rmBtn);
     }
     w.appendChild(row);
   });
 }
-function toggleP(id, v) { papers[id].enabled = v; syncTabs(); }
-function setTotal(id, v) { const n = parseInt(v); if (n >= 1 && n <= 500) papers[id].total = n; }
-function addPaper() {
-  const id = 'p' + nextIdx++; papers[id] = { label: 'Paper ' + (nextIdx - 1), total: 50, enabled: true };
-  paperOrder.push(id); initPaper(id); renderCfg(); syncTabs(); showToast('Paper added!');
+function toggleP(id,v){papers[id].enabled=v;syncTabs();}
+function setTotal(id,v){const n=parseInt(v);if(n>=1&&n<=500)papers[id].total=n;}
+function addPaper(){
+  const id='p'+nextIdx++;papers[id]={label:'Paper '+(nextIdx-1),total:50,enabled:true};
+  paperOrder.push(id);initPaper(id);renderCfg();syncTabs();showToast('Paper added!');
 }
-function removePaperById(id) {
-  if (paperOrder.length <= 1) { showToast('At least one paper required.'); return; }
-  const idx = paperOrder.indexOf(id); if (idx === -1) return;
-  paperOrder.splice(idx, 1); delete papers[id];
-  if (curAK === id) curAK = paperOrder[0];
-  if (curStu === id) curStu = paperOrder[0];
-  if (curQP === id) curQP = paperOrder[0];
-  renderCfg(); syncTabs(); showToast('Paper removed.');
+function removePaperById(id){
+  if(paperOrder.length<=1){showToast('At least one paper required.');return;}
+  const idx=paperOrder.indexOf(id);if(idx===-1)return;
+  paperOrder.splice(idx,1);delete papers[id];
+  if(curAK===id)curAK=paperOrder[0];
+  if(curStu===id)curStu=paperOrder[0];
+  if(curQP===id)curQP=paperOrder[0];
+  renderCfg();syncTabs();showToast('Paper removed.');
 }
-function syncTabs() { renderQPTabs(); renderAKTabs(); renderAKPdfTabs(); renderAKPreview(); }
+function syncTabs(){renderQPTabs();renderAKTabs();renderAKPdfTabs();renderAKPreview();}
 
-/* ═══════════════════════════════════════════════
-   ANSWER KEY PDF TABS
-   ═══════════════════════════════════════════════ */
-function renderAKPdfTabs() {
-  const en = paperOrder.filter(id => papers[id].enabled);
-  const te = document.getElementById('akpdf-tabs'); if (!te) return;
-  const pe = document.getElementById('akpdf-panels'); if (!pe) return;
-  te.innerHTML = ''; pe.innerHTML = '';
-  let curAKPdf = en[0] || paperOrder[0];
-  function buildTabs() {
-    te.innerHTML = ''; pe.innerHTML = '';
-    en.forEach(id => {
-      const b = document.createElement('button'); b.className = 'ptab' + (id === curAKPdf ? ' active' : '');
-      b.textContent = papers[id].label; b.onclick = () => { curAKPdf = id; buildTabs(); };
+// ── QP PDF TABS ──────────────────────────────────────────────────────────────
+function renderQPTabs(){
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  if(!en.includes(curQP))curQP=en[0]||paperOrder[0];
+  const te=document.getElementById('qp-tabs');te.innerHTML='';
+  const pe=document.getElementById('qp-panels');pe.innerHTML='';
+  en.forEach(id=>{
+    const b=document.createElement('button');b.className='ptab'+(id===curQP?' active':'');
+    b.textContent=papers[id].label;b.onclick=()=>{curQP=id;renderQPTabs();};
+    te.appendChild(b);
+    const panel=document.createElement('div');panel.style.display=id===curQP?'block':'none';
+    if(pdfData[id]?.url){
+      panel.innerHTML=`<div class="pdf-loaded">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="pdf-loaded-name">${pdfData[id].name}</span>
+        <a href="${pdfData[id].url}" target="_blank" class="btn btn-sm" style="flex-shrink:0">View PDF</a>
+        <button class="pdf-loaded-remove" onclick="removePDF('${id}')">&times;</button>
+      </div>`;
+    }else{
+      panel.innerHTML=`<div class="pdf-dropzone" ondragover="onDragOver(event,'${id}')" ondragleave="onDragLeave('${id}')" ondrop="onDrop(event,'${id}')" id="drop-${id}">
+        <input type="file" accept="application/pdf" onchange="onFileSelect(event,'${id}')">
+        <div class="pdf-drop-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div>
+        <div class="pdf-drop-title">Upload ${papers[id].label} PDF</div>
+        <div class="pdf-drop-sub">Click or drag & drop — uploads to Supabase Storage (persists on all devices &amp; after refresh)</div>
+        <div id="drop-progress-${id}" style="margin-top:8px;font-size:12px;color:var(--teal);display:none;"></div>
+      </div>`;
+    }
+    pe.appendChild(panel);
+  });
+}
+function onDragOver(e,id){e.preventDefault();document.getElementById('drop-'+id)?.classList.add('drag');}
+function onDragLeave(id){document.getElementById('drop-'+id)?.classList.remove('drag');}
+function onDrop(e,id){e.preventDefault();document.getElementById('drop-'+id)?.classList.remove('drag');const f=e.dataTransfer.files[0];if(f&&f.type==='application/pdf')uploadQPPDF(f,id);}
+function onFileSelect(e,id){const f=e.target.files[0];if(f)uploadQPPDF(f,id);}
+async function uploadQPPDF(file,id){
+  const prog=document.getElementById('drop-progress-'+id);
+  if(prog){prog.style.display='block';prog.textContent='Uploading to Supabase Storage…';}
+  const result=await uploadPDFToStorage(id,file,'qp');
+  if(result){
+    pdfData[id]={url:result.url,name:result.name};
+    showToast('✓ PDF uploaded: '+file.name+' — click ☁ Save to Cloud to persist config.');
+    renderQPTabs();
+  }else{
+    if(prog){prog.style.display='block';prog.style.color='var(--red)';prog.textContent='✗ Upload failed — make sure the omr-pdfs bucket is set to PUBLIC in Supabase Storage.';} 
+    showToast('✗ PDF upload failed — check bucket policy.');
+  }
+}
+function removePDF(id){pdfData[id]=null;renderQPTabs();}
+
+// ── AK PDF TABS ──────────────────────────────────────────────────────────────
+function renderAKPdfTabs(){
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  const te=document.getElementById('akpdf-tabs');if(!te)return;
+  const pe=document.getElementById('akpdf-panels');if(!pe)return;
+  te.innerHTML='';pe.innerHTML='';
+  let curAKPdf=en[0]||paperOrder[0];
+  function buildTabs(){
+    te.innerHTML='';pe.innerHTML='';
+    en.forEach(id=>{
+      const b=document.createElement('button');b.className='ptab'+(id===curAKPdf?' active':'');
+      b.textContent=papers[id].label;b.onclick=()=>{curAKPdf=id;buildTabs();};
       te.appendChild(b);
-      const panel = document.createElement('div'); panel.style.display = id === curAKPdf ? 'block' : 'none';
-      if (akPdfData[id]) {
-        panel.innerHTML = `<div class="pdf-loaded"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="pdf-loaded-name">${akPdfData[id].name}</span><button class="pdf-loaded-remove" onclick="removeAKPDF('${id}')">&times;</button></div>`;
-      } else {
-        panel.innerHTML = `<div class="pdf-dropzone" ondragover="onAKPdfDragOver(event,'${id}')" ondragleave="onAKPdfDragLeave('${id}')" ondrop="onAKPdfDrop(event,'${id}')" id="akdrop-${id}"><input type="file" accept="application/pdf" onchange="onAKPdfFileSelect(event,'${id}')"><div class="pdf-drop-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div><div class="pdf-drop-title">Upload Answer Key PDF for ${papers[id].label}</div><div class="pdf-drop-sub">Click to browse or drag &amp; drop · Stored in Supabase Storage</div></div>`;
+      const panel=document.createElement('div');panel.style.display=id===curAKPdf?'block':'none';
+      if(akPdfData[id]?.url){
+        panel.innerHTML=`<div class="pdf-loaded">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="pdf-loaded-name">${akPdfData[id].name}</span>
+          <a href="${akPdfData[id].url}" target="_blank" class="btn btn-sm" style="flex-shrink:0">View PDF</a>
+          <button class="pdf-loaded-remove" onclick="removeAKPDF('${id}')">&times;</button>
+        </div>`;
+      }else{
+        panel.innerHTML=`<div class="pdf-dropzone" ondragover="onAKPdfDragOver(event,'${id}')" ondragleave="onAKPdfDragLeave('${id}')" ondrop="onAKPdfDrop(event,'${id}')" id="akdrop-${id}">
+          <input type="file" accept="application/pdf" onchange="onAKPdfFileSelect(event,'${id}')">
+          <div class="pdf-drop-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div>
+          <div class="pdf-drop-title">Upload Answer Key PDF for ${papers[id].label}</div>
+          <div class="pdf-drop-sub">Click or drag & drop — uploads to Supabase Storage (persists on all devices &amp; after refresh)</div>
+          <div id="akdrop-progress-${id}" style="margin-top:8px;font-size:12px;color:var(--teal);display:none;"></div>
+        </div>`;
       }
       pe.appendChild(panel);
     });
   }
   buildTabs();
 }
-function onAKPdfDragOver(e, id) { e.preventDefault(); document.getElementById('akdrop-' + id)?.classList.add('drag'); }
-function onAKPdfDragLeave(id) { document.getElementById('akdrop-' + id)?.classList.remove('drag'); }
-function onAKPdfDrop(e, id) { e.preventDefault(); document.getElementById('akdrop-' + id)?.classList.remove('drag'); const f = e.dataTransfer.files[0]; if (f && f.type === 'application/pdf') loadAKPDF(f, id); }
-function onAKPdfFileSelect(e, id) { const f = e.target.files[0]; if (f) loadAKPDF(f, id); }
-function loadAKPDF(file, id) { const r = new FileReader(); r.onload = e => { akPdfData[id] = { base64: e.target.result.split(',')[1], name: file.name }; renderAKPdfTabs(); showToast('Answer Key PDF uploaded: ' + file.name + ' (click ☁ Save to Cloud to persist)'); }; r.readAsDataURL(file); }
-function removeAKPDF(id) { akPdfData[id] = null; renderAKPdfTabs(); }
+function onAKPdfDragOver(e,id){e.preventDefault();document.getElementById('akdrop-'+id)?.classList.add('drag');}
+function onAKPdfDragLeave(id){document.getElementById('akdrop-'+id)?.classList.remove('drag');}
+function onAKPdfDrop(e,id){e.preventDefault();document.getElementById('akdrop-'+id)?.classList.remove('drag');const f=e.dataTransfer.files[0];if(f&&f.type==='application/pdf')uploadAKPDF(f,id);}
+function onAKPdfFileSelect(e,id){const f=e.target.files[0];if(f)uploadAKPDF(f,id);}
+async function uploadAKPDF(file,id){
+  const prog=document.getElementById('akdrop-progress-'+id);
+  if(prog){prog.style.display='block';prog.textContent='Uploading to Supabase Storage…';}
+  const result=await uploadPDFToStorage(id,file,'ak');
+  if(result){
+    akPdfData[id]={url:result.url,name:result.name};
+    showToast('✓ AK PDF uploaded: '+file.name+' — click ☁ Save to Cloud to persist config.');
+    renderAKPdfTabs();
+  }else{
+    if(prog){prog.style.display='block';prog.style.color='var(--red)';prog.textContent='✗ Upload failed — make sure the omr-pdfs bucket is set to PUBLIC in Supabase Storage.';}
+    showToast('✗ AK PDF upload failed — check bucket policy.');
+  }
+}
+function removeAKPDF(id){akPdfData[id]=null;renderAKPdfTabs();}
 
-/* ═══════════════════════════════════════════════
-   QP TABS
-   ═══════════════════════════════════════════════ */
-function renderQPTabs() {
-  const en = paperOrder.filter(id => papers[id].enabled);
-  if (!en.includes(curQP)) curQP = en[0] || paperOrder[0];
-  const te = document.getElementById('qp-tabs'); te.innerHTML = '';
-  const pe = document.getElementById('qp-panels'); pe.innerHTML = '';
-  en.forEach(id => {
-    const b = document.createElement('button'); b.className = 'ptab' + (id === curQP ? ' active' : '');
-    b.textContent = papers[id].label; b.onclick = () => { curQP = id; renderQPTabs(); };
+// ── ANSWER KEY ────────────────────────────────────────────────────────────────
+function renderAKTabs(){
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  if(!en.includes(curAK))curAK=en[0]||paperOrder[0];
+  const te=document.getElementById('ak-tabs');te.innerHTML='';
+  const ge=document.getElementById('ak-grids');ge.innerHTML='';
+  en.forEach(id=>{
+    const b=document.createElement('button');b.className='ptab'+(id===curAK?' active':'');
+    b.textContent=papers[id].label+' ('+papers[id].total+' Qs)';b.onclick=()=>{curAK=id;renderAKTabs();};
     te.appendChild(b);
-    const panel = document.createElement('div'); panel.style.display = id === curQP ? 'block' : 'none';
-    if (pdfData[id]) {
-      panel.innerHTML = `<div class="pdf-loaded"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="pdf-loaded-name">${pdfData[id].name}</span><button class="pdf-loaded-remove" onclick="removePDF('${id}')">&times;</button></div>`;
-    } else {
-      panel.innerHTML = `<div class="pdf-dropzone" ondragover="onDragOver(event,'${id}')" ondragleave="onDragLeave('${id}')" ondrop="onDrop(event,'${id}')" id="drop-${id}"><input type="file" accept="application/pdf" onchange="onFileSelect(event,'${id}')"><div class="pdf-drop-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div><div class="pdf-drop-title">Upload ${papers[id].label} PDF</div><div class="pdf-drop-sub">Click to browse or drag &amp; drop · Stored in Supabase Storage</div></div>`;
-    }
-    pe.appendChild(panel);
+    const g=document.createElement('div');g.id='ak-'+id;g.className='omr-cols';g.style.display=id===curAK?'grid':'none';
+    ge.appendChild(g);buildAKGrid(id);
   });
 }
-function onDragOver(e, id) { e.preventDefault(); document.getElementById('drop-' + id)?.classList.add('drag'); }
-function onDragLeave(id) { document.getElementById('drop-' + id)?.classList.remove('drag'); }
-function onDrop(e, id) { e.preventDefault(); document.getElementById('drop-' + id)?.classList.remove('drag'); const f = e.dataTransfer.files[0]; if (f && f.type === 'application/pdf') loadPDF(f, id); }
-function onFileSelect(e, id) { const f = e.target.files[0]; if (f) loadPDF(f, id); }
-function loadPDF(file, id) { const r = new FileReader(); r.onload = e => { pdfData[id] = { base64: e.target.result.split(',')[1], name: file.name }; renderQPTabs(); showToast('PDF uploaded: ' + file.name + ' (click ☁ Save to Cloud to persist)'); }; r.readAsDataURL(file); }
-function removePDF(id) { pdfData[id] = null; renderQPTabs(); }
-
-function viewPDF(pid) {
-  if (!pdfData[pid]?.base64) { alert('No PDF uploaded for this paper.'); return; }
-  try {
-    const bytes = atob(pdfData[pid].base64);
-    const arr = new Uint8Array(bytes.length);
-    for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
-    const url = URL.createObjectURL(new Blob([arr], { type: 'application/pdf' }));
-    window.open(url, '_blank');
-  } catch (e) { alert('Could not open PDF.'); }
-}
-
-/* ═══════════════════════════════════════════════
-   ANSWER KEY
-   ═══════════════════════════════════════════════ */
-function renderAKTabs() {
-  const en = paperOrder.filter(id => papers[id].enabled);
-  if (!en.includes(curAK)) curAK = en[0] || paperOrder[0];
-  const te = document.getElementById('ak-tabs'); te.innerHTML = '';
-  const ge = document.getElementById('ak-grids'); ge.innerHTML = '';
-  en.forEach(id => {
-    const b = document.createElement('button'); b.className = 'ptab' + (id === curAK ? ' active' : '');
-    b.textContent = papers[id].label + ' (' + papers[id].total + ' Qs)'; b.onclick = () => { curAK = id; renderAKTabs(); };
-    te.appendChild(b);
-    const g = document.createElement('div'); g.id = 'ak-' + id; g.className = 'omr-cols'; g.style.display = id === curAK ? 'grid' : 'none';
-    ge.appendChild(g); buildAKGrid(id);
-  });
-}
-function buildAKGrid(pid) {
-  const total = papers[pid]?.total || 0, half = Math.ceil(total / 2);
-  const wrap = document.getElementById('ak-' + pid); if (!wrap) return;
-  wrap.innerHTML = ''; if (!answerKey[pid]) answerKey[pid] = {};
-  [0, 1].forEach(ci => {
-    const start = ci === 0 ? 1 : half + 1, end = ci === 0 ? half : total;
-    if (start > end) return;
-    const block = document.createElement('div'); block.className = 'omr-block';
-    block.innerHTML = `<div class="omr-hdr"><span>Q</span><div class="opts"><span>A</span><span>B</span><span>C</span><span>D</span></div></div>`;
-    const qs = document.createElement('div'); qs.className = 'omr-qs';
-    for (let q = start; q <= end; q++) {
-      const row = document.createElement('div'); row.className = 'q-row';
-      const num = document.createElement('div'); num.className = 'q-num'; num.textContent = q; row.appendChild(num);
-      const bubs = document.createElement('div'); bubs.className = 'bubs';
-      ['A', 'B', 'C', 'D'].forEach(opt => {
-        const b = document.createElement('div'); b.className = 'ak-bub' + (answerKey[pid][q] === opt ? ' sel' : ''); b.textContent = opt;
-        b.onclick = () => {
-          bubs.querySelectorAll('.ak-bub').forEach(x => x.classList.remove('sel'));
-          if (answerKey[pid][q] === opt) delete answerKey[pid][q];
-          else { answerKey[pid][q] = opt; b.classList.add('sel'); }
+function buildAKGrid(pid){
+  const total=papers[pid]?.total||0,half=Math.ceil(total/2);
+  const wrap=document.getElementById('ak-'+pid);if(!wrap)return;
+  wrap.innerHTML='';if(!answerKey[pid])answerKey[pid]={};
+  [0,1].forEach(ci=>{
+    const start=ci===0?1:half+1,end=ci===0?half:total;
+    if(start>end)return;
+    const block=document.createElement('div');block.className='omr-block';
+    block.innerHTML='<div class="omr-hdr"><span>Q</span><div class="opts"><span>A</span><span>B</span><span>C</span><span>D</span></div></div>';
+    const qs=document.createElement('div');qs.className='omr-qs';
+    for(let q=start;q<=end;q++){
+      const row=document.createElement('div');row.className='q-row';
+      const num=document.createElement('div');num.className='q-num';num.textContent=q;row.appendChild(num);
+      const bubs=document.createElement('div');bubs.className='bubs';
+      ['A','B','C','D'].forEach(opt=>{
+        const b=document.createElement('div');b.className='ak-bub'+(answerKey[pid][q]===opt?' sel':'');b.textContent=opt;
+        b.onclick=()=>{
+          bubs.querySelectorAll('.ak-bub').forEach(x=>x.classList.remove('sel'));
+          if(answerKey[pid][q]===opt)delete answerKey[pid][q];
+          else{answerKey[pid][q]=opt;b.classList.add('sel');}
         };
         bubs.appendChild(b);
       });
-      row.appendChild(bubs); qs.appendChild(row);
+      row.appendChild(bubs);qs.appendChild(row);
     }
-    block.appendChild(qs); wrap.appendChild(block);
+    block.appendChild(qs);wrap.appendChild(block);
   });
 }
-function bulkFill() {
-  const vals = document.getElementById('bulk-input').value.trim().split(',').map(v => v.trim().toUpperCase());
-  const total = papers[curAK].total; if (!answerKey[curAK]) answerKey[curAK] = {};
-  for (let i = 0; i < Math.min(vals.length, total); i++) if (['A','B','C','D'].includes(vals[i])) answerKey[curAK][i + 1] = vals[i];
+function bulkFill(){
+  const vals=document.getElementById('bulk-input').value.trim().split(',').map(v=>v.trim().toUpperCase());
+  const total=papers[curAK].total;if(!answerKey[curAK])answerKey[curAK]={};
+  for(let i=0;i<Math.min(vals.length,total);i++)if(['A','B','C','D'].includes(vals[i]))answerKey[curAK][i+1]=vals[i];
   buildAKGrid(curAK);
 }
-function clearAK() { if (answerKey[curAK]) Object.keys(answerKey[curAK]).forEach(k => delete answerKey[curAK][k]); buildAKGrid(curAK); }
-function saveKey() {
-  const en = paperOrder.filter(id => papers[id].enabled);
-  const summary = en.map(id => `${papers[id].label}: ${Object.keys(answerKey[id]||{}).length}/${papers[id].total} set`).join(' · ');
-  keyLocked = true;
+function clearAK(){if(answerKey[curAK])Object.keys(answerKey[curAK]).forEach(k=>delete answerKey[curAK][k]);buildAKGrid(curAK);}
+function saveKey(){
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  const summary=en.map(id=>`${papers[id].label}: ${Object.keys(answerKey[id]||{}).length}/${papers[id].total} set`).join(' · ');
+  keyLocked=true;
   document.getElementById('ak-editor').classList.add('gone');
   document.getElementById('ak-locked-banner').classList.remove('gone');
-  document.getElementById('ak-locked-sub').textContent = summary;
-  renderAKPreview(); showToast('Answer key saved and locked!');
+  document.getElementById('ak-locked-sub').textContent=summary;
+  renderAKPreview();showToast('Answer key saved and locked!');
 }
-function unlockKey() {
-  keyLocked = false;
+function unlockKey(){
+  keyLocked=false;
   document.getElementById('ak-editor').classList.remove('gone');
   document.getElementById('ak-locked-banner').classList.add('gone');
-  renderAKTabs(); renderAKPreview();
+  renderAKTabs();renderAKPreview();
 }
 
-/* ═══════════════════════════════════════════════
-   STUDENT PORTAL
-   ═══════════════════════════════════════════════ */
-async function doStudentLogin() {
-  const n = document.getElementById('stu-login-name').value.trim();
-  const p = document.getElementById('stu-login-pass').value.trim();
-  if (!n || !p) { alert('Please enter both your name and a password.'); return; }
-  const id = 'stu_' + n.toLowerCase().replace(/\s+/g, '') + '_' + p;
-  activeStudent = { name: n, pass: p, dbId: id };
-  document.getElementById('stu-welcome-name').textContent = n;
+// ── STUDENT PORTAL ────────────────────────────────────────────────────────────
+async function doStudentLogin(){
+  const n=document.getElementById('stu-login-name').value.trim();
+  const p=document.getElementById('stu-login-pass').value.trim();
+  if(!n||!p){alert('Please enter both your name and a password.');return;}
+  const id='stu_'+n.toLowerCase().replace(/\s+/g,'')+'_'+p;
+  activeStudent={name:n,pass:p,dbId:id};
+  document.getElementById('stu-welcome-name').textContent=n;
   document.getElementById('stu-login-sec').classList.add('gone');
   document.getElementById('stu-test-sec').classList.remove('gone');
   showToast('Logging in…');
-  try {
-    const { data } = await sb.from('omr_state').select('data').eq('id', id).single();
-    if (data?.data?.studentAns) {
-      Object.assign(studentAns, data.data.studentAns);
-      if (data.data.guessedAns) Object.assign(guessedAns, data.data.guessedAns);
+  try{
+    const{data}=await sb.from('omr_state').select('data').eq('id',id).single();
+    if(data?.data?.studentAns){
+      Object.assign(studentAns,data.data.studentAns);
+      if(data.data.guessedAns)Object.assign(guessedAns,data.data.guessedAns);
       showToast('Welcome back! Previous answers loaded.');
-    } else {
-      paperOrder.forEach(pid => { studentAns[pid] = {}; guessedAns[pid] = {}; });
+    }else{
+      paperOrder.forEach(pid=>{studentAns[pid]={};guessedAns[pid]={};});
       showToast('Logged in. Start your test!');
     }
-  } catch (e) {
-    paperOrder.forEach(pid => { studentAns[pid] = {}; guessedAns[pid] = {}; });
+  }catch(e){
+    paperOrder.forEach(pid=>{studentAns[pid]={};guessedAns[pid]={};});
     showToast('Logged in. Start your test!');
   }
-  evaluated = false; refreshStudent();
+  evaluated=false;refreshStudent();
 }
-
-function stuLogout() {
-  activeStudent = null;
-  document.getElementById('stu-login-name').value = '';
-  document.getElementById('stu-login-pass').value = '';
+function stuLogout(){
+  activeStudent=null;
+  document.getElementById('stu-login-name').value='';
+  document.getElementById('stu-login-pass').value='';
   document.getElementById('stu-login-sec').classList.remove('gone');
   document.getElementById('stu-test-sec').classList.add('gone');
-  document.getElementById('result-placeholder').style.display = 'block';
+  document.getElementById('result-placeholder').style.display='block';
   document.getElementById('result-content').classList.add('gone');
-  paperOrder.forEach(pid => { studentAns[pid] = {}; guessedAns[pid] = {}; });
-  evaluated = false;
+  paperOrder.forEach(pid=>{studentAns[pid]={};guessedAns[pid]={};});
+  evaluated=false;
 }
-
-function refreshStudent() {
-  if (!activeStudent) return;
-  const en = paperOrder.filter(id => papers[id].enabled);
-  if (!en.includes(curStu)) curStu = en[0] || paperOrder[0];
-  const anyKey = en.some(id => Object.keys(answerKey[id]||{}).length > 0);
-  document.getElementById('no-key-warn').classList.toggle('gone', keyLocked || anyKey);
-  const statusEl = document.getElementById('stu-key-status');
-  if (statusEl) {
-    if (anyKey) {
-      const total = en.reduce((s, id) => s + Object.keys(answerKey[id]||{}).length, 0);
-      statusEl.style.background = 'var(--green-light)'; statusEl.style.color = 'var(--green)'; statusEl.style.border = '1px solid #a3d9b8';
-      statusEl.innerHTML = '✓ Answer key ready (' + total + ' Qs set). You can submit.';
-    } else {
-      statusEl.style.background = 'var(--amber-light)'; statusEl.style.color = 'var(--amber)'; statusEl.style.border = '1px solid #f0c566';
-      statusEl.innerHTML = '⚠ No answer key found. Teacher needs to save the key first.';
+function refreshStudent(){
+  if(!activeStudent)return;
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  if(!en.includes(curStu))curStu=en[0]||paperOrder[0];
+  const anyKey=en.some(id=>Object.keys(answerKey[id]||{}).length>0);
+  document.getElementById('no-key-warn').classList.toggle('gone',keyLocked||anyKey);
+  const statusEl=document.getElementById('stu-key-status');
+  if(statusEl){
+    if(anyKey){
+      const total=en.reduce((s,id)=>s+Object.keys(answerKey[id]||{}).length,0);
+      statusEl.style.background='var(--green-light)';statusEl.style.color='var(--green)';statusEl.style.border='1px solid #a3d9b8';
+      statusEl.innerHTML='✓ Answer key ready ('+total+' Qs set). You can submit.';
+    }else{
+      statusEl.style.background='var(--amber-light)';statusEl.style.color='var(--amber)';statusEl.style.border='1px solid #f0c566';
+      statusEl.innerHTML='⚠ No answer key found. Teacher needs to save the key first.';
     }
   }
-  const pdfContainer = document.getElementById('stu-pdf-btn-container');
-  if (pdfContainer) {
-    pdfContainer.innerHTML = pdfData[curStu]?.base64
-      ? `<button class="btn btn-sm btn-primary" onclick="viewPDF('${curStu}')" style="text-transform:none;letter-spacing:normal;">📄 View Question Paper</button>`
-      : `<span style="font-size:11px;color:var(--text3);">No PDF available</span>`;
+  const pdfContainer=document.getElementById('stu-pdf-btn-container');
+  if(pdfContainer){
+    pdfContainer.innerHTML=pdfData[curStu]?.url
+      ?`<a href="${pdfData[curStu].url}" target="_blank" class="btn btn-sm btn-primary" style="text-transform:none;letter-spacing:normal;">📄 View Question Paper</a>`
+      :'<span style="font-size:11px;color:var(--text3);">No PDF available</span>';
   }
-  const chipsEl = document.getElementById('paper-chips'); chipsEl.innerHTML = '';
-  en.forEach(id => {
-    const done = Object.keys(studentAns[id]||{}).length;
-    const chip = document.createElement('button'); chip.className = 'paper-chip' + (id === curStu ? ' active' : '');
-    chip.innerHTML = `${papers[id].label}${done > 0 ? ' <span style="color:var(--amber)">(Attempted)</span>' : ''}<span class="paper-chip-sub">${done}/${papers[id].total} answered</span>`;
-    chip.onclick = () => { curStu = id; refreshStudent(); };
+  const chipsEl=document.getElementById('paper-chips');chipsEl.innerHTML='';
+  en.forEach(id=>{
+    const done=Object.keys(studentAns[id]||{}).length;
+    const chip=document.createElement('button');chip.className='paper-chip'+(id===curStu?' active':'');
+    chip.innerHTML=`${papers[id].label}${done>0?' <span style="color:var(--amber)">(Attempted)</span>':''}<span class="paper-chip-sub">${done}/${papers[id].total} answered</span>`;
+    chip.onclick=()=>{curStu=id;refreshStudent();};
     chipsEl.appendChild(chip);
   });
-  const hasAnswers = Object.keys(studentAns[curStu]||{}).length > 0;
-  const retakeBtn = document.getElementById('btn-retake');
-  if (hasAnswers) { retakeBtn.classList.remove('gone'); retakeBtn.textContent = `Retake ${papers[curStu].label}`; }
+  const hasAnswers=Object.keys(studentAns[curStu]||{}).length>0;
+  const retakeBtn=document.getElementById('btn-retake');
+  if(hasAnswers){retakeBtn.classList.remove('gone');retakeBtn.textContent=`Retake ${papers[curStu].label}`;}
   else retakeBtn.classList.add('gone');
   buildStuOMR(curStu);
 }
-
-function buildStuOMR(pid) {
-  if (!studentAns[pid]) studentAns[pid] = {};
-  if (!guessedAns[pid]) guessedAns[pid] = {};
-  const total = papers[pid].total, done = Object.keys(studentAns[pid]).length, pct = Math.round(done / total * 100);
-  document.getElementById('stu-stats').innerHTML = `<div class="stat-grid"><div class="stat-card"><div class="stat-lbl">Total</div><div class="stat-val">${total}</div></div><div class="stat-card"><div class="stat-lbl">Answered</div><div class="stat-val sv-g">${done}</div></div><div class="stat-card"><div class="stat-lbl">Unattempted</div><div class="stat-val sv-a">${total-done}</div></div><div class="stat-card"><div class="stat-lbl">Progress</div><div class="stat-val sv-p">${pct}%</div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%"></div></div></div></div>`;
-  const omrEl = document.getElementById('stu-omr'); omrEl.innerHTML = '';
-  const numCols = 4, colSize = Math.ceil(total / numCols);
-  const wrapper = document.createElement('div'); wrapper.className = 'upsc-omr-wrapper';
-  const titleBar = document.createElement('div'); titleBar.className = 'upsc-omr-titlebar';
-  titleBar.innerHTML = `<span class="upsc-omr-title">UPSC Prelims Mock OMR — ${papers[pid].label}</span><span class="upsc-omr-sub">Darken the oval for your answer</span>`;
+function buildStuOMR(pid){
+  if(!studentAns[pid])studentAns[pid]={};
+  if(!guessedAns[pid])guessedAns[pid]={};
+  const total=papers[pid].total,done=Object.keys(studentAns[pid]).length,pct=Math.round(done/total*100);
+  document.getElementById('stu-stats').innerHTML=`<div class="stat-grid"><div class="stat-card"><div class="stat-lbl">Total</div><div class="stat-val">${total}</div></div><div class="stat-card"><div class="stat-lbl">Answered</div><div class="stat-val sv-g">${done}</div></div><div class="stat-card"><div class="stat-lbl">Unattempted</div><div class="stat-val sv-a">${total-done}</div></div><div class="stat-card"><div class="stat-lbl">Progress</div><div class="stat-val sv-p">${pct}%</div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%"></div></div></div></div>`;
+  const omrEl=document.getElementById('stu-omr');omrEl.innerHTML='';
+  const numCols=4,colSize=Math.ceil(total/numCols);
+  const wrapper=document.createElement('div');wrapper.className='upsc-omr-wrapper';
+  const titleBar=document.createElement('div');titleBar.className='upsc-omr-titlebar';
+  titleBar.innerHTML=`<span class="upsc-omr-title">UPSC Prelims Mock OMR — ${papers[pid].label}</span><span class="upsc-omr-sub">Darken the oval for your answer</span>`;
   wrapper.appendChild(titleBar);
-  const infoBar = document.createElement('div'); infoBar.className = 'upsc-omr-infobar';
-  infoBar.innerHTML = `<span class="upsc-omr-info-item">Total: <span>${total}</span></span><span class="upsc-omr-info-item">Answered: <span>${done}</span></span><span class="upsc-omr-info-item">Unattempted: <span>${total-done}</span></span><span class="upsc-omr-info-item">Progress: <span>${pct}%</span></span><span class="upsc-omr-info-item" style="margin-left:auto;font-style:italic;opacity:.7;">🤔 = Mark as Guessed</span>`;
+  const infoBar=document.createElement('div');infoBar.className='upsc-omr-infobar';
+  infoBar.innerHTML=`<span class="upsc-omr-info-item">Total: <span>${total}</span></span><span class="upsc-omr-info-item">Answered: <span>${done}</span></span><span class="upsc-omr-info-item">Unattempted: <span>${total-done}</span></span><span class="upsc-omr-info-item">Progress: <span>${pct}%</span></span><span class="upsc-omr-info-item" style="margin-left:auto;font-style:italic;opacity:.7;">🤔 = Mark as Guessed</span>`;
   wrapper.appendChild(infoBar);
-  const grid = document.createElement('div'); grid.className = 'upsc-omr-grid';
-  for (let ci = 0; ci < numCols; ci++) {
-    const start = ci * colSize + 1, end = Math.min(start + colSize - 1, total);
-    if (start > total) break;
-    const col = document.createElement('div'); col.className = 'upsc-omr-col';
-    const hdr = document.createElement('div'); hdr.className = 'upsc-omr-col-hdr';
-    hdr.innerHTML = `<span>Q</span><div class="upsc-opts"><span>A</span><span>B</span><span>C</span><span>D</span></div><span>?</span>`;
+  const grid=document.createElement('div');grid.className='upsc-omr-grid';
+  for(let ci=0;ci<numCols;ci++){
+    const start=ci*colSize+1,end=Math.min(start+colSize-1,total);
+    if(start>total)break;
+    const col=document.createElement('div');col.className='upsc-omr-col';
+    const hdr=document.createElement('div');hdr.className='upsc-omr-col-hdr';
+    hdr.innerHTML='<span>Q</span><div class="upsc-opts"><span>A</span><span>B</span><span>C</span><span>D</span></div><span>?</span>';
     col.appendChild(hdr);
-    const qs = document.createElement('div'); qs.className = 'upsc-omr-qs';
-    for (let q = start; q <= end; q++) {
-      const row = document.createElement('div'); row.className = 'upsc-q-row';
-      const num = document.createElement('div'); num.className = 'upsc-q-num'; num.textContent = q; row.appendChild(num);
-      const bubs = document.createElement('div'); bubs.className = 'upsc-bubs';
-      ['A','B','C','D'].forEach(opt => {
-        const b = document.createElement('div'); b.id = 'stu-' + pid + '-' + q + '-' + opt;
-        b.className = 'upsc-bubble' + (studentAns[pid][q] === opt ? ' sel' : ''); b.textContent = opt;
-        b.onclick = () => {
-          if (evaluated) return;
-          bubs.querySelectorAll('.upsc-bubble').forEach(x => x.classList.remove('sel'));
-          if (studentAns[pid][q] === opt) { delete studentAns[pid][q]; delete guessedAns[pid][q]; }
-          else { studentAns[pid][q] = opt; b.classList.add('sel'); }
+    const qs=document.createElement('div');qs.className='upsc-omr-qs';
+    for(let q=start;q<=end;q++){
+      const row=document.createElement('div');row.className='upsc-q-row';
+      const num=document.createElement('div');num.className='upsc-q-num';num.textContent=q;row.appendChild(num);
+      const bubs=document.createElement('div');bubs.className='upsc-bubs';
+      ['A','B','C','D'].forEach(opt=>{
+        const b=document.createElement('div');b.id='stu-'+pid+'-'+q+'-'+opt;
+        b.className='upsc-bubble'+(studentAns[pid][q]===opt?' sel':'');b.textContent=opt;
+        b.onclick=()=>{
+          if(evaluated)return;
+          bubs.querySelectorAll('.upsc-bubble').forEach(x=>x.classList.remove('sel'));
+          if(studentAns[pid][q]===opt){delete studentAns[pid][q];delete guessedAns[pid][q];}
+          else{studentAns[pid][q]=opt;b.classList.add('sel');}
           refreshStudent();
         };
         bubs.appendChild(b);
       });
       row.appendChild(bubs);
-      const guessBtn = document.createElement('button'); guessBtn.className = 'upsc-guess-btn' + (guessedAns[pid][q] ? ' active' : '');
-      guessBtn.textContent = '🤔'; guessBtn.title = 'Mark as guessed';
-      guessBtn.onclick = () => { if (evaluated) return; guessedAns[pid][q] = !guessedAns[pid][q]; guessBtn.classList.toggle('active', !!guessedAns[pid][q]); };
-      row.appendChild(guessBtn); qs.appendChild(row);
+      const guessBtn=document.createElement('button');guessBtn.className='upsc-guess-btn'+(guessedAns[pid][q]?' active':'');
+      guessBtn.textContent='🤔';guessBtn.title='Mark as guessed';
+      guessBtn.onclick=()=>{if(evaluated)return;guessedAns[pid][q]=!guessedAns[pid][q];guessBtn.classList.toggle('active',!!guessedAns[pid][q]);};
+      row.appendChild(guessBtn);qs.appendChild(row);
     }
-    col.appendChild(qs); grid.appendChild(col);
+    col.appendChild(qs);grid.appendChild(col);
   }
-  wrapper.appendChild(grid); omrEl.appendChild(wrapper);
+  wrapper.appendChild(grid);omrEl.appendChild(wrapper);
+}
+function retakeCurrentPaper(){
+  if(!confirm(`Clear all answers for ${papers[curStu].label}?`))return;
+  evaluated=false;studentAns[curStu]={};guessedAns[curStu]={};refreshStudent();
 }
 
-function retakeCurrentPaper() {
-  if (!confirm(`Clear all answers for ${papers[curStu].label}?`)) return;
-  evaluated = false; studentAns[curStu] = {}; guessedAns[curStu] = {}; refreshStudent();
-}
-
-/* ═══════════════════════════════════════════════
-   EVALUATE & RESULTS
-   ═══════════════════════════════════════════════ */
-let cachedPStats = {}, currentResTab = 'p1';
-
-async function evaluatePaperAndSave() {
-  const warn = document.getElementById('eval-warn');
-  const en = paperOrder.filter(id => papers[id].enabled);
-  const anyKey = en.some(id => Object.keys(answerKey[id]||{}).length > 0);
-  if (!anyKey) {
-    warn.textContent = '⚠️ No answer key set. Go to Teacher Setup → fill bubbles → Save & Lock Answer Key.';
-    warn.classList.add('show'); return;
-  }
-  warn.classList.remove('show'); evaluated = true;
-  en.forEach(pid => {
-    let pc = 0, pw = 0, ps = 0, pAttempted = 0;
-    const total = papers[pid].total, keySet = Object.keys(answerKey[pid]||{}).length, pTotalMarks = keySet * 2;
-    let qaHTML = `<div class="wrong-section-title">Question Breakdown</div>`;
-    for (let q = 1; q <= total; q++) {
-      const sa = (studentAns[pid]||{})[q], ka = (answerKey[pid]||{})[q], isGuessed = (guessedAns[pid]||{})[q];
-      if (!ka) continue;
-      const isAttempted = !!sa, isCorrect = sa === ka;
-      if (!isAttempted) ps++; else pAttempted++;
-      ['A','B','C','D'].forEach(o => { const el = document.getElementById('stu-' + pid + '-' + q + '-' + o); if (el) { el.className = 'upsc-bubble'; } });
-      const selEl = document.getElementById('stu-' + pid + '-' + q + '-' + sa);
-      const keyEl = document.getElementById('stu-' + pid + '-' + q + '-' + ka);
-      if (isCorrect && isAttempted) { pc++; if (selEl) selEl.classList.add('ok'); }
-      else if (!isCorrect && isAttempted) { pw++; if (selEl) selEl.classList.add('bad'); if (keyEl) keyEl.classList.add('key'); }
-      let yourAnsHTML = isCorrect ? `<span class="ans-chip ac-ok">Your: ${sa}</span>` : isAttempted ? `<span class="ans-chip ac-bad">Your: ${sa}</span>` : `<span class="ans-chip ac-skip">Unattempted</span>`;
-      let guessChip = (isGuessed && isAttempted) ? `<span class="ans-chip ac-guess">🤔 Guessed</span>` : '';
-      let actionBtn = (!isAttempted || isCorrect)
-        ? `<span class="correct-ans-chip" style="margin-left:auto;"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>Key: ${ka}</span>`
-        : `<span class="correct-ans-chip"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>Key: ${ka}</span><button class="btn btn-ai btn-sm" style="margin-left:auto" onclick="askAI(this,'${pid}',${q},'${sa}','${ka}',false)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>AI Explain</button>`;
-      qaHTML += `<div id="qrow-${pid}-${q}"><div class="wrong-row-inner"><div class="wrong-qn">Q${q}</div>${yourAnsHTML}${guessChip}${actionBtn}</div><div class="ai-box" id="ai-${pid}-${q}"></div></div>`;
+// ── EVALUATE & RESULTS ────────────────────────────────────────────────────────
+let cachedPStats={},currentResTab='p1';
+async function evaluatePaperAndSave(){
+  const warn=document.getElementById('eval-warn');
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  const anyKey=en.some(id=>Object.keys(answerKey[id]||{}).length>0);
+  if(!anyKey){warn.textContent='⚠️ No answer key set. Go to Teacher Setup → fill bubbles → Save & Lock Answer Key.';warn.classList.add('show');return;}
+  warn.classList.remove('show');evaluated=true;
+  en.forEach(pid=>{
+    let pc=0,pw=0,ps=0,pAttempted=0;
+    const total=papers[pid].total,keySet=Object.keys(answerKey[pid]||{}).length,pTotalMarks=keySet*2;
+    let qaHTML='<div class="wrong-section-title">Question Breakdown</div>';
+    for(let q=1;q<=total;q++){
+      const sa=(studentAns[pid]||{})[q],ka=(answerKey[pid]||{})[q],isGuessed=(guessedAns[pid]||{})[q];
+      if(!ka)continue;
+      const isAttempted=!!sa,isCorrect=sa===ka;
+      if(!isAttempted)ps++;else pAttempted++;
+      ['A','B','C','D'].forEach(o=>{const el=document.getElementById('stu-'+pid+'-'+q+'-'+o);if(el){el.className='upsc-bubble';}});
+      const selEl=document.getElementById('stu-'+pid+'-'+q+'-'+sa);
+      const keyEl=document.getElementById('stu-'+pid+'-'+q+'-'+ka);
+      if(isCorrect&&isAttempted){pc++;if(selEl)selEl.classList.add('ok');}
+      else if(!isCorrect&&isAttempted){pw++;if(selEl)selEl.classList.add('bad');if(keyEl)keyEl.classList.add('key');}
+      let yourAnsHTML=isCorrect?`<span class="ans-chip ac-ok">Your: ${sa}</span>`:isAttempted?`<span class="ans-chip ac-bad">Your: ${sa}</span>`:`<span class="ans-chip ac-skip">Unattempted</span>`;
+      let guessChip=(isGuessed&&isAttempted)?`<span class="ans-chip ac-guess">🤔 Guessed</span>`:'';
+      let actionBtn=(!isAttempted||isCorrect)
+        ?`<span class="correct-ans-chip" style="margin-left:auto;"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>Key: ${ka}</span>`
+        :`<span class="correct-ans-chip"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>Key: ${ka}</span><button class="btn btn-ai btn-sm" style="margin-left:auto" onclick="askAI(this,'${pid}',${q},'${sa}','${ka}',false)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>AI Explain</button>`;
+      qaHTML+=`<div id="qrow-${pid}-${q}"><div class="wrong-row-inner"><div class="wrong-qn">Q${q}</div>${yourAnsHTML}${guessChip}${actionBtn}</div><div class="ai-box" id="ai-${pid}-${q}"></div></div>`;
     }
-    const pCM = pc * 2, pDed = parseFloat(((pw * 2) / 3).toFixed(2)), pNet = parseFloat((pCM - pDed).toFixed(2));
-    cachedPStats[pid] = { html: `<div class="score-hero" style="margin-bottom:20px;"><div class="score-hero-label">${papers[pid].label} Score</div><div class="score-hero-main">${pNet}</div><div class="score-hero-sub">Out of ${pTotalMarks} · +2 correct · −2/3 wrong · 0 unattempted</div><div class="score-breakdown"><div class="score-item"><div class="score-item-lbl">Attempted</div><div class="score-item-val">${pAttempted}</div></div><div class="score-item"><div class="score-item-lbl">Correct</div><div class="score-item-val">${pc}</div></div><div class="score-item"><div class="score-item-lbl">Wrong</div><div class="score-item-val">${pw}</div></div><div class="score-item"><div class="score-item-lbl">Unattempted</div><div class="score-item-val">${ps}</div></div><div class="score-item"><div class="score-item-lbl">Correct marks</div><div class="score-item-val">+${pCM}</div></div><div class="score-item"><div class="score-item-lbl">Deduction</div><div class="score-item-val">−${pDed}</div></div></div></div><div class="paper-res-hdr" style="padding:0 0 14px 0;border-bottom:none;"><div class="paper-res-title">Detailed Breakdown</div>${pdfData[pid] ? `<button class="btn btn-sm" onclick="viewPDF('${pid}')">📄 View Question Paper</button>` : ''}</div>${qaHTML}` };
+    const pCM=pc*2,pDed=parseFloat(((pw*2)/3).toFixed(2)),pNet=parseFloat((pCM-pDed).toFixed(2));
+    const hasPDF=!!(pdfData[pid]?.url);
+    cachedPStats[pid]={html:`<div class="score-hero" style="margin-bottom:20px;"><div class="score-hero-label">${papers[pid].label} Score</div><div class="score-hero-main">${pNet}</div><div class="score-hero-sub">Out of ${pTotalMarks} · +2 correct · −2/3 wrong · 0 unattempted</div><div class="score-breakdown"><div class="score-item"><div class="score-item-lbl">Attempted</div><div class="score-item-val">${pAttempted}</div></div><div class="score-item"><div class="score-item-lbl">Correct</div><div class="score-item-val">${pc}</div></div><div class="score-item"><div class="score-item-lbl">Wrong</div><div class="score-item-val">${pw}</div></div><div class="score-item"><div class="score-item-lbl">Unattempted</div><div class="score-item-val">${ps}</div></div><div class="score-item"><div class="score-item-lbl">Correct marks</div><div class="score-item-val">+${pCM}</div></div><div class="score-item"><div class="score-item-lbl">Deduction</div><div class="score-item-val">−${pDed}</div></div></div></div><div class="paper-res-hdr" style="padding:0 0 14px 0;border-bottom:none;"><div class="paper-res-title">Detailed Breakdown</div>${hasPDF?`<a href="${pdfData[pid].url}" target="_blank" class="btn btn-sm">📄 View Question Paper</a>`:''}</div>${qaHTML}`};
   });
-  const initial = activeStudent.name.charAt(0).toUpperCase();
-  document.getElementById('res-student-banner').innerHTML = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:50%;background:var(--purple-light);color:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;font-family:'DM Mono',monospace;">${initial}</div><div><div style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Result for</div><div style="font-size:16px;font-weight:600;">${activeStudent.name}</div></div></div>`;
-  currentResTab = en[0]; renderResultTabs(en);
-  document.getElementById('result-placeholder').style.display = 'none';
+  const initial=activeStudent.name.charAt(0).toUpperCase();
+  document.getElementById('res-student-banner').innerHTML=`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:50%;background:var(--purple-light);color:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;font-family:'DM Mono',monospace;">${initial}</div><div><div style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Result for</div><div style="font-size:16px;font-weight:600;">${activeStudent.name}</div></div></div>`;
+  currentResTab=en[0];renderResultTabs(en);
+  document.getElementById('result-placeholder').style.display='none';
   document.getElementById('result-content').classList.remove('gone');
   document.querySelectorAll('.nav-tab')[2].click();
-  try {
-    await sb.from('omr_state').upsert({ id: activeStudent.dbId, data: { studentAns, guessedAns, cachedPStats }, updated_at: new Date().toISOString() });
+  try{
+    await sb.from('omr_state').upsert({id:activeStudent.dbId,data:{studentAns,guessedAns,cachedPStats},updated_at:new Date().toISOString()});
     showToast('✓ Test submitted and saved!');
-  } catch (e) { console.error(e); }
+  }catch(e){console.error(e);}
 }
-
-function renderResultTabs(enabledPapers) {
-  const tabs = document.getElementById('res-tabs'), panels = document.getElementById('res-panels');
-  tabs.innerHTML = ''; panels.innerHTML = '';
-  if (!enabledPapers.includes(currentResTab)) currentResTab = enabledPapers[0];
-  enabledPapers.forEach(pid => {
-    const b = document.createElement('button'); b.className = 'ptab' + (pid === currentResTab ? ' active' : '');
-    b.textContent = papers[pid]?.label || pid; b.onclick = () => { currentResTab = pid; renderResultTabs(enabledPapers); };
+function renderResultTabs(enabledPapers){
+  const tabs=document.getElementById('res-tabs'),panels=document.getElementById('res-panels');
+  tabs.innerHTML='';panels.innerHTML='';
+  if(!enabledPapers.includes(currentResTab))currentResTab=enabledPapers[0];
+  enabledPapers.forEach(pid=>{
+    const b=document.createElement('button');b.className='ptab'+(pid===currentResTab?' active':'');
+    b.textContent=papers[pid]?.label||pid;b.onclick=()=>{currentResTab=pid;renderResultTabs(enabledPapers);};
     tabs.appendChild(b);
-    const panel = document.createElement('div'); panel.style.display = pid === currentResTab ? 'block' : 'none';
-    panel.innerHTML = cachedPStats[pid]?.html || ''; panels.appendChild(panel);
+    const panel=document.createElement('div');panel.style.display=pid===currentResTab?'block':'none';
+    panel.innerHTML=cachedPStats[pid]?.html||'';panels.appendChild(panel);
   });
 }
-
-async function loadStudentResult(btn) {
-  const sName = document.getElementById('res-login-name').value.trim();
-  const sPass = document.getElementById('res-login-pass').value.trim();
-  if (!sName || !sPass) { alert('Please enter Name and Password.'); return; }
-  const oldText = btn.innerHTML; btn.textContent = 'Searching…'; btn.disabled = true;
-  const resultId = 'stu_' + sName.toLowerCase().replace(/\s+/g, '') + '_' + sPass;
-  try {
-    const { data, error } = await sb.from('omr_state').select('data').eq('id', resultId).single();
-    if (error || !data?.data?.cachedPStats) throw new Error('Result not found or incorrect password.');
-    activeStudent = { name: sName, pass: sPass, dbId: resultId };
-    cachedPStats = data.data.cachedPStats;
-    const initial = sName.charAt(0).toUpperCase();
-    document.getElementById('res-student-banner').innerHTML = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:50%;background:var(--purple-light);color:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;font-family:'DM Mono',monospace;">${initial}</div><div><div style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Result for</div><div style="font-size:16px;font-weight:600;">${sName}</div></div></div>`;
-    const en = Object.keys(cachedPStats); currentResTab = en[0]; renderResultTabs(en);
-    document.getElementById('result-placeholder').style.display = 'none';
+async function loadStudentResult(btn){
+  const sName=document.getElementById('res-login-name').value.trim();
+  const sPass=document.getElementById('res-login-pass').value.trim();
+  if(!sName||!sPass){alert('Please enter Name and Password.');return;}
+  const oldText=btn.innerHTML;btn.textContent='Searching…';btn.disabled=true;
+  const resultId='stu_'+sName.toLowerCase().replace(/\s+/g,'')+'_'+sPass;
+  try{
+    const{data,error}=await sb.from('omr_state').select('data').eq('id',resultId).single();
+    if(error||!data?.data?.cachedPStats)throw new Error('Result not found or incorrect password.');
+    activeStudent={name:sName,pass:sPass,dbId:resultId};
+    cachedPStats=data.data.cachedPStats;
+    const initial=sName.charAt(0).toUpperCase();
+    document.getElementById('res-student-banner').innerHTML=`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:50%;background:var(--purple-light);color:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;font-family:'DM Mono',monospace;">${initial}</div><div><div style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Result for</div><div style="font-size:16px;font-weight:600;">${sName}</div></div></div>`;
+    const en=Object.keys(cachedPStats);currentResTab=en[0];renderResultTabs(en);
+    document.getElementById('result-placeholder').style.display='none';
     document.getElementById('result-content').classList.remove('gone');
     showToast('✓ Past result loaded!');
-  } catch (e) { alert(e.message); }
-  btn.innerHTML = oldText; btn.disabled = false;
+  }catch(e){alert(e.message);}
+  btn.innerHTML=oldText;btn.disabled=false;
 }
 
-/* ═══════════════════════════════════════════════
-   AI EXPLAIN (OpenRouter)
-   ═══════════════════════════════════════════════ */
-async function askAI(btn, pid, qNum, sAns, cAns, isCorrect) {
-  const aiDiv = document.getElementById('ai-' + pid + '-' + qNum);
-  if (aiDiv.classList.contains('show') && aiDiv.dataset.loaded === '1') {
-    aiDiv.classList.remove('show'); aiDiv.dataset.loaded = '';
-    btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> AI Explain`;
+// ── AI EXPLAIN ────────────────────────────────────────────────────────────────
+async function askAI(btn,pid,qNum,sAns,cAns,isCorrect){
+  const aiDiv=document.getElementById('ai-'+pid+'-'+qNum);
+  if(aiDiv.classList.contains('show')&&aiDiv.dataset.loaded==='1'){
+    aiDiv.classList.remove('show');aiDiv.dataset.loaded='';
+    btn.innerHTML='<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> AI Explain';
     return;
   }
   aiDiv.classList.add('show');
-  const hasAKPDF = !!(akPdfData[pid]?.base64), hasQPPDF = !!(pdfData[pid]?.base64);
-  aiDiv.innerHTML = `<span class="ai-loading">${!isCorrect && hasAKPDF ? '📄 Extracting from Answer Key PDF…' : '🤖 Generating explanation…'}</span>`;
-  btn.disabled = true; btn.textContent = 'Loading…';
-  const OR_KEY = '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';
-  const OR_MODEL = 'google/gemini-2.0-flash-001';
-  let userContent = [];
-  if (!isCorrect && hasAKPDF) {
-    const prompt = hasQPPDF
-      ? `You are an expert UPSC coach. Two PDFs attached: (1) Question Paper, (2) Official Answer Key for ${papers[pid].label}.\n\nStudent answered Q${qNum} INCORRECTLY.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Extract Q${qNum} text + options from the Question Paper.\n2. Extract the exact rationale from the Answer Key for why ${cAns} is correct.\n3. Explain in 1-2 sentences why ${sAns} is wrong.\n4. Topic to revise.\nBe concise and exam-focused.`
-      : `You are an expert UPSC coach. Attached: Official Answer Key PDF for ${papers[pid].label}.\n\nStudent answered Q${qNum} INCORRECTLY.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Find Q${qNum} in the answer key and quote the rationale verbatim.\n2. Why ${cAns} is correct (2-3 sentences).\n3. Why ${sAns} is wrong (1-2 sentences).\n4. Topic to revise.\nIf not found in PDF, use UPSC expertise.`;
-    userContent = [{ type: 'text', text: prompt }];
-    if (hasQPPDF) userContent.push({ type: 'image_url', image_url: { url: `data:application/pdf;base64,${pdfData[pid].base64}` } });
-    userContent.push({ type: 'image_url', image_url: { url: `data:application/pdf;base64,${akPdfData[pid].base64}` } });
-  } else if (hasQPPDF) {
-    const prompt = isCorrect
-      ? `Extract exact text of Q${qNum} and its options from the attached PDF.`
-      : `You are an expert UPSC coach. Q${qNum} of ${papers[pid].label}.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Extract Q${qNum} text + options from PDF.\n2. Why ${cAns} is correct (2-3 sentences).\n3. Why ${sAns} is wrong (1-2 sentences).\n4. Topic to revise.`;
-    userContent = [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: `data:application/pdf;base64,${pdfData[pid].base64}` } }];
-  } else {
-    userContent = [{ type: 'text', text: `UPSC coach. Paper: ${papers[pid].label} Q${qNum}.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Why ${cAns} is correct (2-3 sentences).\n2. Why ${sAns} is wrong.\n3. Topic to revise.\n(No PDF uploaded — use UPSC expertise.)` }];
+  const hasAKPDF=!!(akPdfData[pid]?.url),hasQPPDF=!!(pdfData[pid]?.url);
+  aiDiv.innerHTML=`<span class="ai-loading">${!isCorrect&&hasAKPDF?'📄 Extracting from Answer Key PDF…':'🤖 Generating explanation…'}</span>`;
+  btn.disabled=true;btn.textContent='Loading…';
+  const OR_KEY='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';
+  const OR_MODEL='google/gemini-2.0-flash-001';
+  let userContent=[];
+  if(!isCorrect&&hasAKPDF){
+    const prompt=hasQPPDF
+      ?`You are an expert UPSC coach. Two PDFs attached: (1) Question Paper, (2) Official Answer Key for ${papers[pid].label}.\n\nStudent answered Q${qNum} INCORRECTLY.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Extract Q${qNum} text + options from the Question Paper.\n2. Extract the exact rationale from the Answer Key for why ${cAns} is correct.\n3. Explain in 1-2 sentences why ${sAns} is wrong.\n4. Topic to revise.\nBe concise and exam-focused.`
+      :`You are an expert UPSC coach. Attached: Official Answer Key PDF for ${papers[pid].label}.\n\nStudent answered Q${qNum} INCORRECTLY.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Find Q${qNum} in the answer key and quote the rationale verbatim.\n2. Why ${cAns} is correct (2-3 sentences).\n3. Why ${sAns} is wrong (1-2 sentences).\n4. Topic to revise.\nIf not found in PDF, use UPSC expertise.`;
+    userContent=[{type:'text',text:prompt}];
+    if(hasQPPDF)userContent.push({type:'image_url',image_url:{url:pdfData[pid].url}});
+    userContent.push({type:'image_url',image_url:{url:akPdfData[pid].url}});
+  }else if(hasQPPDF){
+    const prompt=isCorrect
+      ?`Extract exact text of Q${qNum} and its options from the attached PDF.`
+      :`You are an expert UPSC coach. Q${qNum} of ${papers[pid].label}.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Extract Q${qNum} text + options from PDF.\n2. Why ${cAns} is correct (2-3 sentences).\n3. Why ${sAns} is wrong (1-2 sentences).\n4. Topic to revise.`;
+    userContent=[{type:'text',text:prompt},{type:'image_url',image_url:{url:pdfData[pid].url}}];
+  }else{
+    userContent=[{type:'text',text:`UPSC coach. Paper: ${papers[pid].label} Q${qNum}.\nStudent: ${sAns} | Correct: ${cAns}\n\n1. Why ${cAns} is correct (2-3 sentences).\n2. Why ${sAns} is wrong.\n3. Topic to revise.\n(No PDF uploaded — use UPSC expertise.)`}];
   }
-  try {
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${OR_KEY}`, 'HTTP-Referer': window.location.href, 'X-Title': "Saahil's Test Series OMR" },
-      body: JSON.stringify({ model: OR_MODEL, messages: [{ role: 'user', content: userContent }] })
+  try{
+    const res=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${OR_KEY}`,'HTTP-Referer':window.location.href,'X-Title':'Saahil\'s Test Series OMR'},
+      body:JSON.stringify({model:OR_MODEL,messages:[{role:'user',content:userContent}]})
     });
-    const data = await res.json();
-    aiDiv.textContent = data.choices?.[0]?.message?.content || ('Error: ' + JSON.stringify(data.error));
-    aiDiv.dataset.loaded = '1';
-  } catch (e) { aiDiv.textContent = 'Failed: ' + e.message; }
-  btn.disabled = false;
-  btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Hide`;
+    const data=await res.json();
+    aiDiv.textContent=data.choices?.[0]?.message?.content||('Error: '+JSON.stringify(data.error));
+    aiDiv.dataset.loaded='1';
+  }catch(e){aiDiv.textContent='Failed: '+e.message;}
+  btn.disabled=false;
+  btn.innerHTML='<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Hide';
 }
 
-/* ═══════════════════════════════════════════════
-   AK PREVIEW
-   ═══════════════════════════════════════════════ */
-function renderAKPreview() {
-  const previewTabsEl = document.getElementById('ak-preview-tabs'), previewPanelEl = document.getElementById('ak-preview-panels');
-  if (!previewTabsEl || !previewPanelEl) return;
-  const en = paperOrder.filter(id => papers[id].enabled);
-  previewTabsEl.innerHTML = ''; previewPanelEl.innerHTML = '';
-  let curPT = en[0] || paperOrder[0];
-  function renderPT() {
-    previewTabsEl.innerHTML = ''; previewPanelEl.innerHTML = '';
-    en.forEach(id => {
-      const b = document.createElement('button'); b.className = 'ptab' + (id === curPT ? ' active' : '');
-      b.textContent = papers[id].label; b.onclick = () => { curPT = id; renderPT(); };
+// ── AK PREVIEW ────────────────────────────────────────────────────────────────
+function renderAKPreview(){
+  const previewTabsEl=document.getElementById('ak-preview-tabs'),previewPanelEl=document.getElementById('ak-preview-panels');
+  if(!previewTabsEl||!previewPanelEl)return;
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  previewTabsEl.innerHTML='';previewPanelEl.innerHTML='';
+  let curPT=en[0]||paperOrder[0];
+  function renderPT(){
+    previewTabsEl.innerHTML='';previewPanelEl.innerHTML='';
+    en.forEach(id=>{
+      const b=document.createElement('button');b.className='ptab'+(id===curPT?' active':'');
+      b.textContent=papers[id].label;b.onclick=()=>{curPT=id;renderPT();};
       previewTabsEl.appendChild(b);
-      const panel = document.createElement('div'); panel.style.display = id === curPT ? 'block' : 'none';
-      const total = papers[id].total, ak = answerKey[id] || {}, setCount = Object.keys(ak).length;
-      panel.innerHTML = `<div style="font-size:12px;color:var(--text2);margin-bottom:8px;">${setCount} of ${total} answers set${setCount === 0 ? ' — fill the Answer Key grid above.' : ''}</div>`;
-      if (setCount > 0) {
-        const grid = document.createElement('div'); grid.className = 'ak-preview-grid';
-        for (let q = 1; q <= total; q++) {
-          const item = document.createElement('div'); item.className = 'ak-preview-item';
-          item.innerHTML = `<span class="ak-preview-qn">Q${q}</span>${ak[q] ? `<span class="ak-preview-ans">${ak[q]}</span>` : `<span class="ak-preview-empty">—</span>`}`;
+      const panel=document.createElement('div');panel.style.display=id===curPT?'block':'none';
+      const total=papers[id].total,ak=answerKey[id]||{},setCount=Object.keys(ak).length;
+      panel.innerHTML=`<div style="font-size:12px;color:var(--text2);margin-bottom:8px;">${setCount} of ${total} answers set${setCount===0?' — fill the Answer Key grid above.':''}</div>`;
+      if(setCount>0){
+        const grid=document.createElement('div');grid.className='ak-preview-grid';
+        for(let q=1;q<=total;q++){
+          const item=document.createElement('div');item.className='ak-preview-item';
+          item.innerHTML=`<span class="ak-preview-qn">Q${q}</span>${ak[q]?`<span class="ak-preview-ans">${ak[q]}</span>`:`<span class="ak-preview-empty">—</span>`}`;
           grid.appendChild(item);
         }
         panel.appendChild(grid);
@@ -1137,16 +970,13 @@ function renderAKPreview() {
   renderPT();
 }
 
-/* ═══════════════════════════════════════════════
-   TOAST & INIT
-   ═══════════════════════════════════════════════ */
-function showToast(msg) {
-  const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500);
+// ── TOAST & INIT ──────────────────────────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);
 }
-
-renderCfg(); renderQPTabs(); renderAKTabs(); renderAKPdfTabs(); renderAKPreview();
-loadFromCloud().catch(() => {});
+renderCfg();renderQPTabs();renderAKTabs();renderAKPdfTabs();renderAKPreview();
+loadFromCloud().catch(()=>{});
 </script>
 </body>
 </html>
