@@ -145,7 +145,47 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
 .auth-card{max-width:400px;margin:20px auto;background:var(--surface);padding:30px;border-radius:var(--rl);border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,0.05);text-align:center;}
 .auth-title{font-size:18px;font-weight:600;margin-bottom:6px;font-family:'DM Serif Display',serif;}
 .auth-sub{font-size:13px;color:var(--text2);margin-bottom:20px;}
-@media(max-width:640px){.main{padding:14px}.header{padding:0 14px}.omr-cols{grid-template-columns:1fr}.score-breakdown{grid-template-columns:1fr 1fr}.nav-tab .ntxt{display:none}}
+
+/* ===== UPSC-STYLE OMR SHEET (Student Section) ===== */
+:root{--omr-pink:#e0127a;--omr-pink-light:#fce8f3;--omr-pink-mid:#f8d0e8;--omr-pink-border:#f0a8d0;--omr-pink-dark:#a8005a;}
+.upsc-omr-wrapper{background:#fff;border:2px solid var(--omr-pink);border-radius:8px;overflow:hidden;margin-bottom:4px;box-shadow:0 2px 16px rgba(224,18,122,.12);}
+.upsc-omr-titlebar{background:linear-gradient(90deg,var(--omr-pink) 0%,#c00065 100%);color:#fff;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.upsc-omr-title{font-size:12px;font-weight:700;letter-spacing:.4px;font-family:'DM Mono',monospace;text-transform:uppercase;}
+.upsc-omr-sub{font-size:10px;opacity:.8;font-style:italic;}
+.upsc-omr-infobar{background:var(--omr-pink-light);border-bottom:1.5px solid var(--omr-pink-border);padding:6px 16px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+.upsc-omr-info-item{font-size:10.5px;color:var(--omr-pink-dark);font-weight:600;font-family:'DM Mono',monospace;}
+.upsc-omr-info-item span{color:var(--omr-pink);font-size:12px;font-weight:700;}
+.upsc-omr-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.upsc-omr-col{border-right:1.5px solid var(--omr-pink-border);background:#fff;}
+.upsc-omr-col:last-child{border-right:none;}
+.upsc-omr-col-hdr{background:var(--omr-pink-mid);border-bottom:1.5px solid var(--omr-pink);padding:4px 6px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:700;color:var(--omr-pink-dark);letter-spacing:.6px;font-family:'DM Mono',monospace;text-transform:uppercase;}
+.upsc-omr-col-hdr .upsc-opts{display:flex;gap:5px;}
+.upsc-omr-col-hdr .upsc-opts span{width:20px;text-align:center;}
+.upsc-omr-qs{padding:2px 4px;display:flex;flex-direction:column;}
+.upsc-q-row{display:flex;align-items:center;gap:3px;padding:1.5px 2px;border-bottom:1px solid #fce8f3;transition:background .1s;}
+.upsc-q-row:last-child{border-bottom:none;}
+.upsc-q-row:hover{background:#fff5fa;}
+.upsc-q-num{font-size:9px;color:var(--omr-pink-dark);width:20px;text-align:right;flex-shrink:0;font-family:'DM Mono',monospace;font-weight:700;padding-right:2px;}
+.upsc-bubs{display:flex;gap:3px;align-items:center;}
+.upsc-bubble{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--omr-pink-border);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;cursor:pointer;color:var(--omr-pink-dark);transition:all .12s;flex-shrink:0;user-select:none;font-family:'DM Mono',monospace;background:#fff;}
+.upsc-bubble:hover{border-color:var(--omr-pink);color:var(--omr-pink);background:var(--omr-pink-light);}
+.upsc-bubble.sel{background:var(--omr-pink);border-color:var(--omr-pink);color:#fff;box-shadow:0 0 0 2px rgba(224,18,122,.2);}
+.upsc-bubble.ok{background:var(--green);border-color:var(--green);color:#fff;}
+.upsc-bubble.bad{background:var(--red);border-color:var(--red);color:#fff;}
+.upsc-bubble.key{background:var(--teal-light);border-color:var(--teal);color:var(--teal);}
+.upsc-guess-btn{padding:1px 5px;border-radius:10px;font-size:8.5px;font-weight:600;cursor:pointer;border:1px solid var(--omr-pink-border);background:transparent;color:var(--omr-pink-dark);transition:all .12s;margin-left:2px;line-height:1.6;flex-shrink:0;}
+.upsc-guess-btn:hover{border-color:var(--omr-pink);color:var(--omr-pink);}
+.upsc-guess-btn.active{background:var(--omr-pink-light);border-color:var(--omr-pink);color:var(--omr-pink);}
+/* Answer key preview in teacher section */
+.ak-preview-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px;}
+.ak-preview-item{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-family:'DM Mono',monospace;}
+.ak-preview-qn{color:var(--text3);font-weight:600;}
+.ak-preview-ans{background:var(--green);color:#fff;padding:1px 7px;border-radius:10px;font-weight:700;font-size:11px;}
+.ak-preview-empty{background:var(--surface2);color:var(--text3);padding:1px 7px;border-radius:10px;font-size:11px;}
+/* Correct answer chip in results */
+.correct-ans-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;font-family:'DM Mono',monospace;background:var(--green-light);color:var(--green);border:1px solid #a3d9b8;}
+
+@media(max-width:640px){.main{padding:14px}.header{padding:0 14px}.upsc-omr-grid{grid-template-columns:repeat(2,1fr)}.score-breakdown{grid-template-columns:1fr 1fr}.nav-tab .ntxt{display:none}}
 </style>
 </head>
 <body>
@@ -216,6 +256,17 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
     <div class="card">
       <div class="card-title">
         <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Answer Key PDFs
+        <span style="font-weight:400;color:var(--text3);font-size:11px;text-transform:none;letter-spacing:0;margin-left:4px;">— upload for AI-powered explanations of wrong answers</span>
+      </div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:12px;">Upload the official answer key PDF per paper. When a student gets a question wrong, the AI will extract the exact explanation/rationale from this PDF.</div>
+      <div id="akpdf-tabs" class="ptabs"></div>
+      <div id="akpdf-panels"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
         Answer Key
       </div>
       <div id="ak-locked-banner" class="ak-locked gone">
@@ -250,6 +301,18 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{outli
         </div>
       </div>
     </div>
+
+    <!-- ANSWER KEY PREVIEW CARD -->
+    <div class="card" id="ak-preview-card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Answer Key Preview
+      </div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Quick view of all saved answers across papers.</div>
+      <div id="ak-preview-tabs" class="ptabs"></div>
+      <div id="ak-preview-panels"></div>
+    </div>
+
   </div>
 </div>
 
@@ -343,7 +406,7 @@ async function saveToCloud() {
   const btn = document.getElementById('cloud-save-btn');
   btn.disabled = true; btn.textContent = 'Saving...';
   try {
-    const state = { papers, paperOrder, nextIdx, answerKey, keyLocked, pdfData };
+    const state = { papers, paperOrder, nextIdx, answerKey, keyLocked, pdfData, akPdfData };
     const { error } = await sb.from('omr_state').upsert({ id: 'main', data: state, updated_at: new Date().toISOString() });
     if (error) throw error;
     showToast('✓ Saved to cloud! Configurations and PDFs are now preserved.');
@@ -374,6 +437,9 @@ async function loadFromCloud() {
       
       Object.keys(pdfData).forEach(k => delete pdfData[k]);
       if (s.pdfData) Object.assign(pdfData, s.pdfData);
+
+      Object.keys(akPdfData).forEach(k => delete akPdfData[k]);
+      if (s.akPdfData) Object.assign(akPdfData, s.akPdfData);
       
       keyLocked = !!s.keyLocked;
       paperOrder.forEach(id => {
@@ -381,12 +447,13 @@ async function loadFromCloud() {
         if (!studentAns[id]) studentAns[id] = {};
         if (!guessedAns[id]) guessedAns[id] = {};
         if (!pdfData[id]) pdfData[id] = null;
+        if (!akPdfData[id]) akPdfData[id] = null;
       });
       const en = paperOrder.filter(id => papers[id].enabled);
       curAK = en[0] || paperOrder[0];
       curStu = en[0] || paperOrder[0];
       curQP = en[0] || paperOrder[0];
-      renderCfg(); renderQPTabs(); renderAKTabs(); refreshStudent();
+      renderCfg(); renderQPTabs(); renderAKTabs(); renderAKPdfTabs(); renderAKPreview(); refreshStudent();
       
       if (keyLocked) {
         document.getElementById('ak-editor').classList.add('gone');
@@ -407,12 +474,13 @@ let papers = { p1:{label:'Paper 1 — GS',total:100,enabled:true}, p2:{label:'Pa
 let paperOrder = ['p1','p2'];
 let nextIdx = 3;
 const answerKey={p1:{},p2:{}}, studentAns={p1:{},p2:{}}, guessedAns={p1:{},p2:{}}, pdfData={p1:null,p2:null};
+const akPdfData={p1:null,p2:null}; /* Answer Key PDFs — used for AI explanations of wrong answers */
 let evaluated=false, keyLocked=false, curAK='p1', curStu='p1', curQP='p1';
 
 // Student Auth State
 let activeStudent = null; 
 
-function initPaper(id){if(!answerKey[id])answerKey[id]={};if(!studentAns[id])studentAns[id]={};if(!guessedAns[id])guessedAns[id]={};if(!pdfData[id])pdfData[id]=null;}
+function initPaper(id){if(!answerKey[id])answerKey[id]={};if(!studentAns[id])studentAns[id]={};if(!guessedAns[id])guessedAns[id]={};if(!pdfData[id])pdfData[id]=null;if(!akPdfData[id])akPdfData[id]=null;}
 
 /* NAV & TEACHER AUTH */
 let teacherUnlocked = false;
@@ -492,7 +560,38 @@ function setLabel(id,v){papers[id].label=v||id;}
 function setTotal(id,v){const n=parseInt(v);if(n>=1&&n<=500)papers[id].total=n;}
 function addPaper(){const id='p'+nextIdx++;papers[id]={label:'Paper '+(nextIdx-1),total:50,enabled:true};paperOrder.push(id);initPaper(id);renderCfg();syncTabs();showToast('Paper added!');}
 function removePaperById(id){if(paperOrder.length<=1){showToast('At least one paper required.');return;}const idx=paperOrder.indexOf(id);if(idx===-1)return;paperOrder.splice(idx,1);delete papers[id];if(curAK===id)curAK=paperOrder[0];if(curStu===id)curStu=paperOrder[0];if(curQP===id)curQP=paperOrder[0];renderCfg();syncTabs();showToast('Paper removed.');}
-function syncTabs(){renderQPTabs();renderAKTabs();}
+function syncTabs(){renderQPTabs();renderAKTabs();renderAKPdfTabs();renderAKPreview();}
+
+/* ANSWER KEY PDF TABS */
+function renderAKPdfTabs(){
+  const en=paperOrder.filter(id=>papers[id].enabled);
+  const te=document.getElementById('akpdf-tabs'); if(!te)return;
+  const pe=document.getElementById('akpdf-panels'); if(!pe)return;
+  te.innerHTML=''; pe.innerHTML='';
+  let curAKPdf = en[0]||paperOrder[0];
+  function buildTabs(){
+    te.innerHTML=''; pe.innerHTML='';
+    en.forEach(id=>{
+      const b=document.createElement('button'); b.className='ptab'+(id===curAKPdf?' active':'');
+      b.textContent=papers[id].label; b.onclick=()=>{curAKPdf=id;buildTabs();};
+      te.appendChild(b);
+      const panel=document.createElement('div'); panel.style.display=id===curAKPdf?'block':'none';
+      if(akPdfData[id]){
+        panel.innerHTML=`<div class="pdf-loaded"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="pdf-loaded-name">${akPdfData[id].name}</span><button class="pdf-loaded-remove" onclick="removeAKPDF('${id}')">&times;</button></div>`;
+      }else{
+        panel.innerHTML=`<div class="pdf-dropzone" ondragover="onAKPdfDragOver(event,'${id}')" ondragleave="onAKPdfDragLeave('${id}')" ondrop="onAKPdfDrop(event,'${id}')" id="akdrop-${id}"><input type="file" accept="application/pdf" onchange="onAKPdfFileSelect(event,'${id}')"><div class="pdf-drop-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div><div class="pdf-drop-title">Upload Answer Key PDF for ${papers[id].label}</div><div class="pdf-drop-sub">Click to browse or drag &amp; drop · Used for RAG-powered AI explanations</div></div>`;
+      }
+      pe.appendChild(panel);
+    });
+  }
+  buildTabs();
+}
+function onAKPdfDragOver(e,id){e.preventDefault();document.getElementById('akdrop-'+id)?.classList.add('drag');}
+function onAKPdfDragLeave(id){document.getElementById('akdrop-'+id)?.classList.remove('drag');}
+function onAKPdfDrop(e,id){e.preventDefault();document.getElementById('akdrop-'+id)?.classList.remove('drag');const f=e.dataTransfer.files[0];if(f&&f.type==='application/pdf')loadAKPDF(f,id);}
+function onAKPdfFileSelect(e,id){const f=e.target.files[0];if(f)loadAKPDF(f,id);}
+function loadAKPDF(file,id){const r=new FileReader();r.onload=e=>{akPdfData[id]={base64:e.target.result.split(',')[1],name:file.name};renderAKPdfTabs();showToast('Answer Key PDF uploaded: '+file.name);};r.readAsDataURL(file);}
+function removeAKPDF(id){akPdfData[id]=null;renderAKPdfTabs();}
 
 /* QP TABS */
 function renderQPTabs(){
@@ -594,13 +693,14 @@ function saveKey(){
   document.getElementById('ak-editor').classList.add('gone');
   document.getElementById('ak-locked-banner').classList.remove('gone');
   document.getElementById('ak-locked-sub').textContent=summary;
+  renderAKPreview();
   showToast('Answer key saved and locked!');
 }
 function unlockKey(){
   keyLocked=false;
   document.getElementById('ak-editor').classList.remove('gone');
   document.getElementById('ak-locked-banner').classList.add('gone');
-  renderAKTabs();
+  renderAKTabs(); renderAKPreview();
 }
 
 /* STUDENT PORTAL & AUTH */
@@ -712,52 +812,87 @@ function buildStuOMR(pid){
   const done=Object.keys(studentAns[pid]).length, pct=Math.round(done/total*100);
   
   document.getElementById('stu-stats').innerHTML=`<div class="stat-grid"><div class="stat-card"><div class="stat-lbl">Total</div><div class="stat-val">${total}</div></div><div class="stat-card"><div class="stat-lbl">Answered</div><div class="stat-val sv-g">${done}</div></div><div class="stat-card"><div class="stat-lbl">Unattempted</div><div class="stat-val sv-a">${total-done}</div></div><div class="stat-card"><div class="stat-lbl">Progress</div><div class="stat-val sv-p">${pct}%</div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%"></div></div></div></div>`;
+
   const omrEl=document.getElementById('stu-omr'); omrEl.innerHTML='';
-  const wrap=document.createElement('div'); wrap.className='omr-cols';
-  [0,1].forEach(ci=>{
-    const start=ci===0?1:half+1, end=ci===0?half:total;
-    if(start>end)return;
-    const block=document.createElement('div'); block.className='omr-block';
-    block.innerHTML=`<div class="omr-hdr"><span>Q</span><div class="opts" style="display:flex; justify-content:space-between; width:100%;"><span style="margin-left:14px">Options</span> <span>Guess?</span></div></div>`;
-    const qs=document.createElement('div'); qs.className='omr-qs';
-    for(let q=start;q<=end;q++){
-      const row=document.createElement('div'); row.className='q-row';
-      const num=document.createElement('div'); num.className='q-num'; num.textContent=q; row.appendChild(num);
-      const bubs=document.createElement('div'); bubs.className='bubs';
+
+  /* ── UPSC-style 4-column OMR ── */
+  const numCols = 4;
+  const colSize = Math.ceil(total / numCols);
+
+  const wrapper = document.createElement('div'); wrapper.className='upsc-omr-wrapper';
+
+  // Title bar
+  const titleBar = document.createElement('div'); titleBar.className='upsc-omr-titlebar';
+  titleBar.innerHTML=`<span class="upsc-omr-title">UPSC Prelims Mock OMR — ${papers[pid].label}</span><span class="upsc-omr-sub">Darken the oval for your answer</span>`;
+  wrapper.appendChild(titleBar);
+
+  // Info bar
+  const infoBar = document.createElement('div'); infoBar.className='upsc-omr-infobar';
+  infoBar.innerHTML=`
+    <span class="upsc-omr-info-item">Total: <span>${total}</span></span>
+    <span class="upsc-omr-info-item">Answered: <span>${done}</span></span>
+    <span class="upsc-omr-info-item">Unattempted: <span>${total-done}</span></span>
+    <span class="upsc-omr-info-item">Progress: <span>${pct}%</span></span>
+    <span class="upsc-omr-info-item" style="margin-left:auto;font-style:italic;opacity:.7;">🤔 = Mark as Guessed</span>`;
+  wrapper.appendChild(infoBar);
+
+  // 4-column grid
+  const grid = document.createElement('div'); grid.className='upsc-omr-grid';
+
+  for(let ci=0; ci<numCols; ci++){
+    const start = ci*colSize + 1;
+    const end   = Math.min(start + colSize - 1, total);
+    if(start > total) break;
+
+    const col = document.createElement('div'); col.className='upsc-omr-col';
+
+    // Column header
+    const hdr = document.createElement('div'); hdr.className='upsc-omr-col-hdr';
+    hdr.innerHTML=`<span>Q</span><div class="upsc-opts"><span>A</span><span>B</span><span>C</span><span>D</span></div><span>?</span>`;
+    col.appendChild(hdr);
+
+    const qs = document.createElement('div'); qs.className='upsc-omr-qs';
+    for(let q=start; q<=end; q++){
+      const row = document.createElement('div'); row.className='upsc-q-row';
+
+      const num = document.createElement('div'); num.className='upsc-q-num'; num.textContent=q;
+      row.appendChild(num);
+
+      const bubs = document.createElement('div'); bubs.className='upsc-bubs';
       ['A','B','C','D'].forEach(opt=>{
-        const b=document.createElement('div'); b.id='stu-'+pid+'-'+q+'-'+opt;
-        b.className='bubble'+(studentAns[pid][q]===opt?' sel':''); b.textContent=opt;
+        const b = document.createElement('div');
+        b.id='stu-'+pid+'-'+q+'-'+opt;
+        b.className='upsc-bubble'+(studentAns[pid][q]===opt?' sel':'');
+        b.textContent=opt;
         b.onclick=()=>{
           if(evaluated)return;
-          bubs.querySelectorAll('.bubble').forEach(x=>x.classList.remove('sel'));
-          if(studentAns[pid][q]===opt) {
-            delete studentAns[pid][q];
-            delete guessedAns[pid][q];
-          } else {
-            studentAns[pid][q]=opt;
-            b.classList.add('sel');
-          }
+          bubs.querySelectorAll('.upsc-bubble').forEach(x=>x.classList.remove('sel'));
+          if(studentAns[pid][q]===opt){delete studentAns[pid][q];delete guessedAns[pid][q];}
+          else{studentAns[pid][q]=opt; b.classList.add('sel');}
           refreshStudent();
         };
         bubs.appendChild(b);
       });
       row.appendChild(bubs);
-      
+
       const guessBtn = document.createElement('button');
-      guessBtn.className = 'guess-btn' + (guessedAns[pid][q] ? ' active' : '');
-      guessBtn.textContent = '🤔 Guess';
-      guessBtn.onclick = () => {
-        if(evaluated) return;
-        guessedAns[pid][q] = !guessedAns[pid][q];
-        guessBtn.classList.toggle('active', guessedAns[pid][q]);
+      guessBtn.className='upsc-guess-btn'+(guessedAns[pid][q]?' active':'');
+      guessBtn.textContent='🤔';
+      guessBtn.title='Mark as guessed';
+      guessBtn.onclick=()=>{
+        if(evaluated)return;
+        guessedAns[pid][q]=!guessedAns[pid][q];
+        guessBtn.classList.toggle('active',!!guessedAns[pid][q]);
       };
       row.appendChild(guessBtn);
-      
+
       qs.appendChild(row);
     }
-    block.appendChild(qs); wrap.appendChild(block);
-  });
-  omrEl.appendChild(wrap);
+    col.appendChild(qs);
+    grid.appendChild(col);
+  }
+  wrapper.appendChild(grid);
+  omrEl.appendChild(wrapper);
 }
 
 function retakeCurrentPaper() {
@@ -812,7 +947,7 @@ async function evaluatePaperAndSave(){
       if(!isAttempted){ ps++; }
       else { pAttempted++; }
 
-      ['A','B','C','D'].forEach(o=>{const el=document.getElementById('stu-'+pid+'-'+q+'-'+o);if(el)el.classList.remove('sel','ok','bad','key');});
+      ['A','B','C','D'].forEach(o=>{const el=document.getElementById('stu-'+pid+'-'+q+'-'+o);if(el){el.classList.remove('sel','ok','bad','key','upsc-bubble');el.classList.add('upsc-bubble');}});
       const selEl=document.getElementById('stu-'+pid+'-'+q+'-'+sa);
       const keyEl=document.getElementById('stu-'+pid+'-'+q+'-'+ka);
       
@@ -826,10 +961,28 @@ async function evaluatePaperAndSave(){
       
       let guessChipHTML = (isGuessed && isAttempted) ? `<span class="ans-chip ac-guess">🤔 Guessed</span>` : '';
 
+      /* Show correct answer chip + AI Explain button for wrong answers */
       let actionBtn = '';
-      if(isAttempted) {
-          const btnText = isCorrect ? 'Extract Question' : 'AI Explain';
-          actionBtn = `<button class="btn btn-ai btn-sm" style="margin-left:auto" onclick="askAI(this,'${pid}',${q},'${sa}','${ka}', ${isCorrect})"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> ${btnText}</button>`;
+      if (!isAttempted) {
+        actionBtn = `<span class="correct-ans-chip" style="margin-left:auto;">
+          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>
+          Key: ${ka}
+        </span>`;
+      } else if (isCorrect) {
+        actionBtn = `<span class="correct-ans-chip" style="margin-left:auto;">
+          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>
+          Key: ${ka}
+        </span>`;
+      } else {
+        /* Wrong answer — show key chip AND AI Explain button */
+        actionBtn = `<span class="correct-ans-chip">
+          <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0"><path d="M20 6L9 17l-5-5"/></svg>
+          Key: ${ka}
+        </span>
+        <button class="btn btn-ai btn-sm" style="margin-left:auto" onclick="askAI(this,'${pid}',${q},'${sa}','${ka}',false)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          AI Explain
+        </button>`;
       }
 
       qaHTML += `
@@ -987,16 +1140,32 @@ async function askAI(btn, pid, qNum, sAns, cAns, isCorrect) {
   }
   
   aiDiv.classList.add('show');
-  aiDiv.innerHTML = '<span class="ai-loading">Fetching with Gemini Pro...</span>';
+  const hasAKPdfForLoading = !!(akPdfData[pid]?.base64);
+  aiDiv.innerHTML = `<span class="ai-loading">${!isCorrect && hasAKPdfForLoading ? '📄 Extracting from Answer Key PDF via RAG...' : 'Fetching with Gemini Pro...'}</span>`;
   btn.disabled = true; btn.textContent = 'Loading...';
   
-  const hasPDF = !!(pdfData[pid]?.base64);
+  const hasQPPDF = !!(pdfData[pid]?.base64);
+  const hasAKPDF = !!(akPdfData[pid]?.base64);
   const GEMINI_KEY = 'AIzaSyA3_6EPX_O6TU72UdYZTD03S6vaO-In9TE';
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_KEY}`;
   
   let parts = [];
   
-  if (hasPDF) {
+  if (!isCorrect && hasAKPDF) {
+    /* RAG: use Answer Key PDF to extract rationale for wrong answers */
+    const akInstruction = `You are an expert UPSC coach. The attached document is the OFFICIAL ANSWER KEY / RATIONALE document for ${papers[pid].label}.\n\nThe student answered Question ${qNum} INCORRECTLY.\nStudent's answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. Search the document for Question ${qNum} and extract the EXACT rationale/explanation provided in the answer key for why ${cAns} is correct. Quote it verbatim if present.\n2. Explain in 2-3 sentences why Option ${cAns} is correct based on the document.\n3. Explain in 1-2 sentences why Option ${sAns} is incorrect.\n4. Mention the specific topic/chapter the student should revise.\n\nIf the document does not have an explicit rationale for Q${qNum}, use your UPSC expertise and the correct answer to give a focused explanation. Be concise and exam-focused.`;
+    
+    parts = [
+      { text: akInstruction },
+      { inlineData: { mimeType: 'application/pdf', data: akPdfData[pid].base64 } }
+    ];
+    /* Also attach QP PDF if available for question context */
+    if (hasQPPDF) {
+      parts.splice(1, 0, { inlineData: { mimeType: 'application/pdf', data: pdfData[pid].base64 } });
+      parts[0].text = `You are an expert UPSC coach. Two documents are attached: (1) the Question Paper and (2) the Official Answer Key with rationale for ${papers[pid].label}.\n\nThe student answered Question ${qNum} INCORRECTLY.\nStudent's answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. From the QUESTION PAPER, extract the exact text of Question ${qNum} and its options. Show this at the top in quotes.\n2. From the ANSWER KEY document, extract and quote the exact rationale/explanation for why ${cAns} is correct.\n3. Explain in 1-2 sentences why Option ${sAns} is incorrect.\n4. Mention the specific topic/chapter to revise.\n\nBe concise and exam-focused.`;
+    }
+  } else if (hasQPPDF) {
+    /* Fallback: use Question Paper PDF */
     const instructionText = isCorrect 
       ? `Find Question ${qNum} in the attached document and output ONLY the exact text of the question and its options. Do not explain anything else.`
       : `You are an expert UPSC coach. Refer to the uploaded document.\n\nStudent answered Q${qNum} of ${papers[pid].label} incorrectly.\nStudent answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. FIRST, extract the EXACT original question text and options for Question ${qNum} from the document and print it clearly at the very top of your response inside quote marks.\n2. Then explain why ${cAns} is correct (2-3 sentences)\n3. Explain why ${sAns} is wrong (1-2 sentences)\n4. Mention a broad topic to revise.\n\nBe concise and exam-focused.`;
@@ -1006,9 +1175,10 @@ async function askAI(btn, pid, qNum, sAns, cAns, isCorrect) {
       { inlineData: { mimeType: 'application/pdf', data: pdfData[pid].base64 } }
     ];
   } else {
+    /* No PDF available */
     const noPDFText = isCorrect
       ? `Student correctly answered Q${qNum}. Since there is no PDF uploaded, just say: "No PDF uploaded for this paper. Cannot extract question text."`
-      : `You are an expert UPSC coach.\n\nPaper: ${papers[pid].label}\nQuestion: ${qNum}\nStudent answer: ${sAns}\nCorrect answer: ${cAns}\n\nProvide:\n1. Why ${cAns} is correct (2-3 UPSC-focused sentences)\n2. Why ${sAns} is wrong (1-2 sentences)\n3. Topic to revise\n\nNote: No question paper uploaded — give general UPSC context.`;
+      : `You are an expert UPSC coach.\n\nPaper: ${papers[pid].label}\nQuestion: ${qNum}\nStudent answer: ${sAns}\nCorrect answer: ${cAns}\n\nProvide:\n1. Why ${cAns} is correct (2-3 UPSC-focused sentences)\n2. Why ${sAns} is wrong (1-2 sentences)\n3. Topic to revise\n\nNote: No answer key or question paper PDF uploaded — give general UPSC context.`;
       
     parts = [ { text: noPDFText } ];
   }
@@ -1043,11 +1213,44 @@ async function askAI(btn, pid, qNum, sAns, cAns, isCorrect) {
   btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Hide`;
 }
 
+/* ANSWER KEY PREVIEW (Teacher section) */
+function renderAKPreview(){
+  const previewTabsEl = document.getElementById('ak-preview-tabs');
+  const previewPanelEl = document.getElementById('ak-preview-panels');
+  if(!previewTabsEl || !previewPanelEl) return;
+  const en = paperOrder.filter(id=>papers[id].enabled);
+  previewTabsEl.innerHTML=''; previewPanelEl.innerHTML='';
+  let curPreviewTab = en[0]||paperOrder[0];
+  function renderPreviewTabs(){
+    previewTabsEl.innerHTML=''; previewPanelEl.innerHTML='';
+    en.forEach(id=>{
+      const b=document.createElement('button'); b.className='ptab'+(id===curPreviewTab?' active':'');
+      b.textContent=papers[id].label; b.onclick=()=>{curPreviewTab=id;renderPreviewTabs();};
+      previewTabsEl.appendChild(b);
+      const panel=document.createElement('div'); panel.style.display=id===curPreviewTab?'block':'none';
+      const total=papers[id].total; const ak=answerKey[id]||{};
+      const setCount=Object.keys(ak).length;
+      panel.innerHTML=`<div style="font-size:12px;color:var(--text2);margin-bottom:8px;">${setCount} of ${total} answers set${setCount===0?' — fill the Answer Key grid above to see preview here.':''}</div>`;
+      if(setCount>0){
+        const grid=document.createElement('div'); grid.className='ak-preview-grid';
+        for(let q=1;q<=total;q++){
+          const item=document.createElement('div'); item.className='ak-preview-item';
+          item.innerHTML=`<span class="ak-preview-qn">Q${q}</span>${ak[q]?`<span class="ak-preview-ans">${ak[q]}</span>`:`<span class="ak-preview-empty">—</span>`}`;
+          grid.appendChild(item);
+        }
+        panel.appendChild(grid);
+      }
+      previewPanelEl.appendChild(panel);
+    });
+  }
+  renderPreviewTabs();
+}
+
 /* TOAST */
 function showToast(msg){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
 /* INIT */
-renderCfg(); renderQPTabs(); renderAKTabs();
+renderCfg(); renderQPTabs(); renderAKTabs(); renderAKPdfTabs(); renderAKPreview();
 loadFromCloud().catch(()=>{});
 </script>
 </body>
