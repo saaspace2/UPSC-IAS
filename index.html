@@ -1129,7 +1129,7 @@ async function loadStudentResult(btn) {
   btn.disabled = false;
 }
 
-/* AI EXPLAIN WITH GEMINI 1.5 PRO */
+/* AI EXPLAIN VIA OPENROUTER */
 async function askAI(btn, pid, qNum, sAns, cAns, isCorrect) {
   const aiDiv = document.getElementById('ai-' + pid + '-' + qNum);
   if (aiDiv.classList.contains('show') && aiDiv.dataset.loaded === '1') {
@@ -1138,77 +1138,85 @@ async function askAI(btn, pid, qNum, sAns, cAns, isCorrect) {
     btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> ${isCorrect ? 'Extract Question' : 'AI Explain'}`;
     return;
   }
-  
+
   aiDiv.classList.add('show');
   const hasAKPdfForLoading = !!(akPdfData[pid]?.base64);
-  aiDiv.innerHTML = `<span class="ai-loading">${!isCorrect && hasAKPdfForLoading ? '📄 Extracting from Answer Key PDF via RAG...' : 'Fetching with Gemini Pro...'}</span>`;
+  aiDiv.innerHTML = `<span class="ai-loading">${!isCorrect && hasAKPdfForLoading ? '📄 Extracting from Answer Key PDF via RAG...' : 'Fetching via OpenRouter...'}</span>`;
   btn.disabled = true; btn.textContent = 'Loading...';
-  
+
   const hasQPPDF = !!(pdfData[pid]?.base64);
   const hasAKPDF = !!(akPdfData[pid]?.base64);
-  const GEMINI_KEY = 'AIzaSyA3_6EPX_O6TU72UdYZTD03S6vaO-In9TE';
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_KEY}`;
-  
-  let parts = [];
-  
+  const OR_KEY = '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';
+  const OR_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
+  const OR_MODEL = 'google/gemini-2.0-flash-001';
+
+  /* Build the user message content array (OpenRouter vision format) */
+  let userContent = [];
+
   if (!isCorrect && hasAKPDF) {
     /* RAG: use Answer Key PDF to extract rationale for wrong answers */
-    const akInstruction = `You are an expert UPSC coach. The attached document is the OFFICIAL ANSWER KEY / RATIONALE document for ${papers[pid].label}.\n\nThe student answered Question ${qNum} INCORRECTLY.\nStudent's answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. Search the document for Question ${qNum} and extract the EXACT rationale/explanation provided in the answer key for why ${cAns} is correct. Quote it verbatim if present.\n2. Explain in 2-3 sentences why Option ${cAns} is correct based on the document.\n3. Explain in 1-2 sentences why Option ${sAns} is incorrect.\n4. Mention the specific topic/chapter the student should revise.\n\nIf the document does not have an explicit rationale for Q${qNum}, use your UPSC expertise and the correct answer to give a focused explanation. Be concise and exam-focused.`;
-    
-    parts = [
-      { text: akInstruction },
-      { inlineData: { mimeType: 'application/pdf', data: akPdfData[pid].base64 } }
-    ];
-    /* Also attach QP PDF if available for question context */
+    let promptText;
     if (hasQPPDF) {
-      parts.splice(1, 0, { inlineData: { mimeType: 'application/pdf', data: pdfData[pid].base64 } });
-      parts[0].text = `You are an expert UPSC coach. Two documents are attached: (1) the Question Paper and (2) the Official Answer Key with rationale for ${papers[pid].label}.\n\nThe student answered Question ${qNum} INCORRECTLY.\nStudent's answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. From the QUESTION PAPER, extract the exact text of Question ${qNum} and its options. Show this at the top in quotes.\n2. From the ANSWER KEY document, extract and quote the exact rationale/explanation for why ${cAns} is correct.\n3. Explain in 1-2 sentences why Option ${sAns} is incorrect.\n4. Mention the specific topic/chapter to revise.\n\nBe concise and exam-focused.`;
+      promptText = `You are an expert UPSC coach. Two documents are attached: (1) the Question Paper and (2) the Official Answer Key with rationale for ${papers[pid].label}.\n\nThe student answered Question ${qNum} INCORRECTLY.\nStudent's answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. From the QUESTION PAPER, extract the exact text of Question ${qNum} and its options. Show this at the top in quotes.\n2. From the ANSWER KEY document, extract and quote the exact rationale/explanation for why ${cAns} is correct.\n3. Explain in 1-2 sentences why Option ${sAns} is incorrect.\n4. Mention the specific topic/chapter to revise.\n\nBe concise and exam-focused.`;
+      userContent = [
+        { type: 'text', text: promptText },
+        { type: 'image_url', image_url: { url: `data:application/pdf;base64,${pdfData[pid].base64}` } },
+        { type: 'image_url', image_url: { url: `data:application/pdf;base64,${akPdfData[pid].base64}` } }
+      ];
+    } else {
+      promptText = `You are an expert UPSC coach. The attached document is the OFFICIAL ANSWER KEY / RATIONALE document for ${papers[pid].label}.\n\nThe student answered Question ${qNum} INCORRECTLY.\nStudent's answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. Search the document for Question ${qNum} and extract the EXACT rationale/explanation provided in the answer key for why ${cAns} is correct. Quote it verbatim if present.\n2. Explain in 2-3 sentences why Option ${cAns} is correct based on the document.\n3. Explain in 1-2 sentences why Option ${sAns} is incorrect.\n4. Mention the specific topic/chapter the student should revise.\n\nIf the document does not have an explicit rationale for Q${qNum}, use your UPSC expertise and the correct answer to give a focused explanation. Be concise and exam-focused.`;
+      userContent = [
+        { type: 'text', text: promptText },
+        { type: 'image_url', image_url: { url: `data:application/pdf;base64,${akPdfData[pid].base64}` } }
+      ];
     }
   } else if (hasQPPDF) {
     /* Fallback: use Question Paper PDF */
-    const instructionText = isCorrect 
+    const instructionText = isCorrect
       ? `Find Question ${qNum} in the attached document and output ONLY the exact text of the question and its options. Do not explain anything else.`
       : `You are an expert UPSC coach. Refer to the uploaded document.\n\nStudent answered Q${qNum} of ${papers[pid].label} incorrectly.\nStudent answer: Option ${sAns}\nCorrect answer: Option ${cAns}\n\n1. FIRST, extract the EXACT original question text and options for Question ${qNum} from the document and print it clearly at the very top of your response inside quote marks.\n2. Then explain why ${cAns} is correct (2-3 sentences)\n3. Explain why ${sAns} is wrong (1-2 sentences)\n4. Mention a broad topic to revise.\n\nBe concise and exam-focused.`;
-      
-    parts = [
-      { text: instructionText },
-      { inlineData: { mimeType: 'application/pdf', data: pdfData[pid].base64 } }
+    userContent = [
+      { type: 'text', text: instructionText },
+      { type: 'image_url', image_url: { url: `data:application/pdf;base64,${pdfData[pid].base64}` } }
     ];
   } else {
-    /* No PDF available */
+    /* No PDF available — text only */
     const noPDFText = isCorrect
       ? `Student correctly answered Q${qNum}. Since there is no PDF uploaded, just say: "No PDF uploaded for this paper. Cannot extract question text."`
       : `You are an expert UPSC coach.\n\nPaper: ${papers[pid].label}\nQuestion: ${qNum}\nStudent answer: ${sAns}\nCorrect answer: ${cAns}\n\nProvide:\n1. Why ${cAns} is correct (2-3 UPSC-focused sentences)\n2. Why ${sAns} is wrong (1-2 sentences)\n3. Topic to revise\n\nNote: No answer key or question paper PDF uploaded — give general UPSC context.`;
-      
-    parts = [ { text: noPDFText } ];
+    userContent = [ { type: 'text', text: noPDFText } ];
   }
-  
+
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch(OR_ENDPOINT, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OR_KEY}`,
+        'HTTP-Referer': window.location.href,
+        'X-Title': "Saahil's Test Series OMR"
       },
       body: JSON.stringify({
-        contents: [{ parts: parts }]
+        model: OR_MODEL,
+        messages: [{ role: 'user', content: userContent }]
       })
     });
-    
+
     const data = await res.json();
     let text = 'Could not get explanation.';
-    
-    if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
-      text = data.candidates[0].content.parts[0].text;
+
+    if (data.choices && data.choices.length > 0) {
+      text = data.choices[0].message?.content || text;
     } else if (data.error) {
-       text = 'Gemini API Error: ' + data.error.message;
+      text = 'OpenRouter Error: ' + (data.error.message || JSON.stringify(data.error));
     }
-    
+
     aiDiv.textContent = text;
     aiDiv.dataset.loaded = '1';
   } catch(e) {
     aiDiv.textContent = 'Failed. Check your connection and try again. (' + e.message + ')';
   }
-  
+
   btn.disabled = false;
   btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg> Hide`;
 }
